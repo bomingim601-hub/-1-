@@ -59,14 +59,14 @@ const IMG = {
     "연애는어려워":      {av:"av/crying-bear.jpg"},
     "다음화주세요":      {av:"av/drawn-dog.jpg"},
     "환승연애과몰입중":    {av:"av/bear-beige.jpg"},
-    "유재회":         {av:"av/bunny-glasses.jpg"},
-    "오빠그말진짜야":     {av:"av/crying-bear.jpg"},
-    "유우시의콧구멍":     {av:"av/drawn-dog.jpg"},
-    "음버":          {av:"av/pixel-pray.jpg"},
-    "우리다시만나":      {av:"av/sarang.jpg"},
-    "국밥먹고뽀뽀해":     {av:"av/cream-dog.jpg"},
-    "환승연애최종회기다림":  {av:"av/polka-heart.jpg"},
-    "둘이행복해줘제발":    {av:"av/bear-yellow.jpg"}
+    "유재회":         {av:"av/glasses-rilakkuma.jpg"},
+    "오빠그말진짜야":     {av:"av/idol-mic.jpg"},
+    "유우시의콧구멍":     {av:"av/guinea-pig.jpg"},
+    "음버":          {av:"av/brown-polka.jpg"},
+    "우리다시만나":      {av:"av/dog-cat.jpg"},
+    "국밥먹고뽀뽀해":     {av:"av/white-puppy.jpg"},
+    "환승연애최종회기다림":  {av:"av/necklace-girl.jpg"},
+    "둘이행복해줘제발":    {av:"av/scarf-girl.jpg"}
   },
 
   /* 유우시 인스타 */
