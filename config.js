@@ -35,14 +35,38 @@ const IMG = {
   iconMsg:     "icon-msg.webp",
   iconMemo:    "icon-memo.webp",
 
-  /* 트위터(X) 프사 — 아이디마다 하나씩 자동으로 배정돼 (사진 추가/교체는 av 폴더에) */
-  twAvatars: Array.from({length:19},(_,i)=>`av/av${String(i+1).padStart(2,"0")}.jpg`),
-
-  /* 아이디·프사를 직접 정한 계정 [트윗 이름]: {id, av} */
+  /* 트위터(X) 계정별 프사 (고정). id를 비워두면 영어 아이디 자동 */
   twFixed: {
-    "입력해주세요": {id:"p1easenter", av:"av/p1easenter.jpg"},
-    "짱짱":        {id:"Yezzzan9",   av:"av/yezzzan9.jpg"},
-    "ま(しめ)ろ":   {id:"meroniams",  av:"av/meroniams.jpg"}
+    "입력해주세요":      {id:"p1easenter", av:"av/p1easenter.jpg"},
+    "환연보는계":       {av:"av/rose-boy.jpg"},
+    "ㅇㅇ":          {av:"av/default.jpg"},
+    "ま(しめ)ろ":      {id:"meroniams", av:"av/meroniams.jpg"},
+    "장점잉잉":        {av:"av/letter-s.jpg"},
+    "미니쿠리얌":       {av:"av/white-bear.jpg"},
+    "짱짱":          {id:"Yezzzan9", av:"av/yezzzan9.jpg"},
+    "유댕이":         {av:"av/seal.jpg"},
+    "굥":           {av:"av/cream-dog.jpg"},
+    "걍사귀라고햇잖아":    {av:"av/gun-girl.jpg"},
+    "대대♥":         {av:"av/sarang.jpg"},
+    "yushi_archive": {av:"av/letter-y.jpg"},
+    "오니온오디온":      {av:"av/pixel-pray.jpg"},
+    "마이러뷰":        {av:"av/glasses-girl.jpg"},
+    "난이미이걸좋아해":    {av:"av/bunny-glasses.jpg"},
+    "관찰중":         {av:"av/doll.jpg"},
+    "걍울고있음":       {av:"av/crying-draw.jpg"},
+    "우리집연프방":      {av:"av/polka-heart.jpg"},
+    "유댕이기다려":      {av:"av/bear-yellow.jpg"},
+    "연애는어려워":      {av:"av/crying-bear.jpg"},
+    "다음화주세요":      {av:"av/drawn-dog.jpg"},
+    "환승연애과몰입중":    {av:"av/bear-beige.jpg"},
+    "유재회":         {av:"av/bunny-glasses.jpg"},
+    "오빠그말진짜야":     {av:"av/crying-bear.jpg"},
+    "유우시의콧구멍":     {av:"av/drawn-dog.jpg"},
+    "음버":          {av:"av/pixel-pray.jpg"},
+    "우리다시만나":      {av:"av/sarang.jpg"},
+    "국밥먹고뽀뽀해":     {av:"av/cream-dog.jpg"},
+    "환승연애최종회기다림":  {av:"av/polka-heart.jpg"},
+    "둘이행복해줘제발":    {av:"av/bear-yellow.jpg"}
   },
 
   /* 유우시 인스타 */
