@@ -75,7 +75,10 @@ async function dayCard(n,sub=''){await black(0);await say(`<span class="big">${n
 /* 문자 투표: 유우시를 누르면 '이제 잊기로 했잖아...' 후 유우시 칸이 까맣게 */
 async function vote(d){
   const Y=NAMES.length-1;
-  const i=await smsAsk('vote',NAMES,{reject:Y,rejectText:FORGET,onReject:()=>{st.y[d]=1},log:st.sms,day:d});
+  /* 성공 루트(1~3일차 유우시 시도 + 3일차 거짓말 + 퍼스널룸 유우시)면 4일차부터 유우시에게 투표 가능 */
+  const open=d>=4&&st.lie&&st.pr&&st.y[1]&&st.y[2]&&st.y[3];
+  const i=await smsAsk('vote',NAMES,open?{log:st.sms,day:d}:{reject:Y,rejectText:FORGET,onReject:()=>{st.y[d]=1},log:st.sms,day:d});
+  if(open&&i==Y)st.y[d]=1;
   st.sms.push({day:d,kind:'vote',name:NAMES[i]});
   return i;
 }
