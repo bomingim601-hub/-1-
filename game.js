@@ -56,6 +56,19 @@ function cardPick(title,opts){return new Promise(res=>{
     await sleep(1700);res(+b.dataset.i)});
 })}
 
+/* 퍼스널룸: 복도의 문 5개 중 하나 열기 */
+function roomPick(){return new Promise(res=>{
+  set(`<p class="q">출연자 퍼스널룸 공개 정보<small>기회는 단 한 번뿐이에요</small></p><div class="hall">${ROOM.map((r,i)=>`<button class="door" data-i="${i}" style="animation-delay:${i*80}ms"><span class="dlt"></span><span class="dlf"><i class="dp"></i><i class="dp"></i><b class="dn"><small>ROOM 0${i+1}</small>${r[0]}</b><i class="dk"></i></span></button>`).join('')}</div>`);
+  let done=false;
+  scr.querySelectorAll('.door').forEach(b=>b.onclick=async()=>{if(done)return;done=true;
+    scr.querySelectorAll('.door').forEach(d=>d!==b&&d.classList.add('dim'));b.classList.add('open');
+    await sleep(1300);fadeEl.classList.add('on');await sleep(500);res(+b.dataset.i)});
+})}
+function roomInfo(i){return new Promise(res=>{
+  set(`<div class="pcard"><p class="pct">PERSONAL ROOM · 0${i+1}</p><b class="pcn">${ROOM[i][0]}</b><i class="pcl"></i><p class="pci">${ROOM[i][1]}</p><p class="pcs">공개 정보</p></div><button class="box" id="tapnx">방에서 나가기</button>`);
+  $('tapnx').onclick=res;
+})}
+
 /* ---------- 공통 장면 ---------- */
 async function dayCard(n,sub=''){await black(0);await say(`<span class="big">${n}일차</span>${sub?`<span class="sub">${sub}</span>`:''}`,sub?2400:1800)}
 
@@ -133,9 +146,9 @@ async function d4(){
   const c=await ask('',['X룸에 들어간다','퍼스널룸에 들어간다']);
   if(c==0){await xRoom()}
   else{
-    const i=await ask('출연자 퍼스널룸 공개 정보<small>기회는 단 한 번뿐이에요</small>',ROOM.map(r=>r[0]));
+    const i=await roomPick();
     if(i==NAMES.length-1)st.pr=1;
-    await tap(`<p class="q" style="margin:0">${ROOM[i][0]}</p><p class="q" style="margin:0">${ROOM[i][1]}</p>`);
+    await roomInfo(i);
   }
   await black(300);
   await vote(4);
