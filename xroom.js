@@ -43,9 +43,11 @@ function xRoom(){return new Promise(done=>{
       ov.innerHTML=`<div class="pv"><div class="fl" id="fl" data-a="flip"><div class="ff">${pic(p[0],i==3?'c':'')}</div><div class="fb" ${bgUrl('linedPaper')}></div></div></div><p class="hint" style="color:#fff">사진을 눌러 뒤집어보세요</p><button class="box" data-a="close">닫기</button>`;
       ov.querySelector('.fb').textContent=p[1];ov.classList.add('on');
       bindA(ov,{flip(){$('fl').classList.toggle('f');seenL.add(i)},close(){ov.classList.remove('on');seenL.size==5?M.look():M.left()}})},
-    desk(){set(`<button class="box" data-a="note">${NOTE_INTRO}</button>`);bindA(scr,M)},
-    note(){set(`<div class="sheet" ${bgUrl('linedPaper')} style="min-height:100cqw"></div><button class="box" data-a="fin">다음으로</button>`);
-      scr.querySelector('.sheet').textContent=NOTE;bindA(scr,M)},
+    desk(){set(`<p class="hint">${NOTE_INTRO}</p><div class="desk" ${bgUrl('desk')}><button class="memo" data-a="note" ${bgUrl('linedPaper')}><i class="mclip"></i><b>대영이</b><span></span><span></span><span></span></button></div>`);bindA(scr,M)},
+    note(){const ov=$('ov');
+      ov.innerHTML=`<div class="mbig" ${bgUrl('linedPaper')}></div><button class="box" data-a="close">메모 내려놓기</button>`;
+      ov.querySelector('.mbig').textContent=NOTE;ov.classList.add('on');
+      bindA(ov,{close(){ov.classList.remove('on');set(`<p class="hint">${NOTE_INTRO}</p><div class="desk" ${bgUrl('desk')}><button class="memo seen" data-a="note" ${bgUrl('linedPaper')}><i class="mclip"></i><b>대영이</b><span></span><span></span><span></span></button></div><button class="box" data-a="fin">다음으로</button>`);bindA(scr,M)}})},
     fin(){done()}
   };
   letterScene(LETTER2,lookHtml(),M);

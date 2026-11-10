@@ -24,6 +24,7 @@ const IMG = {
   ring:        "obj-ring.png",
   keyring:     "obj-keyring.png",
   mug:         "obj-mug.png",
+  desk:        "desk.jpg",           // 책상 위 (메모 놓이는 곳)
   drawer:      "drawer.png",         // 협탁(서랍장)
   clothespin:  "clothespin.png",     // 폴라로이드 집게
   scarf:       "obj-scarf.png",

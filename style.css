@@ -276,3 +276,15 @@ img.c{object-fit:contain!important;background:#c1272d}
 .act .xrt.on{color:#00ba7c}
 .act .xbm.on{color:#1d9bf0}.act .xbm.on .hp{fill:#1d9bf0}
 .sc.x{top:40.5cqw}
+
+/* 책상 위 메모 */
+.desk{position:relative;width:100vw;max-width:100cqw;margin:0 -6cqw;aspect-ratio:626/417;background:#b98b5a center/cover;box-shadow:0 3cqw 6cqw rgba(0,0,0,.5);animation:up .5s both}
+.memo{position:absolute;left:30%;top:36%;width:27%;aspect-ratio:3/3.6;border:0;padding:4cqw 2.4cqw 2cqw;background:#fffdf6 center/cover;transform:rotate(-7deg);
+  box-shadow:.8cqw 1.6cqw 2.4cqw rgba(0,0,0,.35);display:flex;flex-direction:column;gap:1.6cqw;align-items:flex-start;cursor:pointer;animation:mbob 2.4s ease-in-out infinite}
+.memo.seen{animation:none}
+@keyframes mbob{50%{transform:rotate(-7deg) translateY(-1cqw);box-shadow:1cqw 2.6cqw 3cqw rgba(0,0,0,.3)}}
+.memo b{font-family:"Gaegu","Nanum Pen Script",cursive;font-size:4.2cqw;color:#222}
+.memo span{display:block;height:.5cqw;width:90%;background:rgba(40,30,20,.35);border-radius:1cqw}.memo span:nth-of-type(2){width:70%}.memo span:nth-of-type(3){width:80%}
+.mclip{position:absolute;top:-2cqw;left:50%;width:3.4cqw;height:7cqw;margin-left:-1.7cqw;border:.6cqw solid #9aa0a6;border-radius:2cqw;border-bottom-color:transparent}
+.mbig{width:84cqw;max-height:140cqw;overflow-y:auto;background:#fffdf6 center/cover;padding:9cqw 7cqw;transform:rotate(-1.5deg);box-shadow:0 3cqw 6cqw rgba(0,0,0,.6);
+  font-family:"Gaegu","Nanum Pen Script",cursive;font-weight:700;font-size:4.5cqw;line-height:1.7;color:#1d1d1d;white-space:pre-line;text-align:left;word-break:keep-all;animation:lift .45s cubic-bezier(.2,.9,.3,1.2) both}
