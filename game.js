@@ -166,7 +166,7 @@ async function d5(){
   const Y=NAMES.length-1,others=NAMES.map((_,i)=>i).filter(i=>i!=Y);
   await smsAsk('final',NAMES,ok?{dis:others,glow:[Y],log:st.sms,day:5}:{dis:[Y],log:st.sms,day:5});
   await black(300);
-  const tw=st.lie?TW_SUCCESS:TW_FAIL;
+  const tw=ok?TW_SUCCESS:TW_FAIL;   // 실제 엔딩(재회 성공 여부)에 맞는 트윗
   if(ok){await alarm(ALARM_PICKED,'',{from:'제작진'});await sleep(600);await alarm('메시지',ALARM_CHECK)}
   else{await say('1시간 후',1500);await alarm(ALARM_NOPICK,'',{from:'제작진'});await sleep(600);await alarm('메시지',ALARM_CHECK)}
   await Phone.open(tw);
