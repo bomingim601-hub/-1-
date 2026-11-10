@@ -143,6 +143,6 @@ function openPost(i){const p=(typeof INSTA_POSTS!=='undefined'&&INSTA_POSTS[i])|
   <div class="igpi" ${bg(u)}><span class="igpn">${i+1}/${n}</span></div>
   <div class="igpd">${IMG.insta.map((_,k)=>`<i class="${k==i?'on':''}"></i>`).join('')}</div>
   <div class="igpa"><span class="ilk" data-n="${p[1]}" onclick="tg(this)">${IGI.ht}<i>${p[1]}</i></span><span>${IGI.cm}<i>${Math.max(1,Math.round(p[1]/9))}</i></span><span>${IGI.sd}</span><span class="ibm" onclick="tg(this)">${IGI.bm}</span></div>
-  <div class="igpl"><span class="igpf">${pa}${pa}${pa}</span><span><b>daeyoung_</b>님 외 <b>여러 명</b>이 좋아합니다</span></div>
+  <div class="igpl"><span class="igpf">${(p[4]||[]).map(k=>`<div class="pav" style="background-image:url('av/${k}.jpg')"></div>`).join('')||pa+pa+pa}</span><span><b>${p[3]||'daeyoung_'}</b>님 외 <b>여러 명</b>이 좋아합니다</span></div>
   <p class="igpc"><b>yushi</b> ${p[0]}</p><p class="igpt2">${p[2]}</p></div>`;
   go('igp')}
