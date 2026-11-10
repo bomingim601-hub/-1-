@@ -36,6 +36,12 @@ const HW1=["moon","cozy","dreamy","peach","night","milky","sunny","lazy","mint",
 const HW2=["cat","bunny","holic","lover","diary","log","zip","toast","mochi","jelly","star","fan","bear","tea","day","bean"];
 const handle=n=>{if(/^[a-z0-9_]+$/i.test(n))return n;let h=7;for(const c of n)h=(h*131+c.charCodeAt(0))%1000003;
   const sep=["_","","_",""][h%4];return HW1[h%16]+sep+HW2[(h>>4)%16]+(h%3?String(h%97).padStart(2,'0'):'')};
+/* 트위터 프사: 모든 트윗 아이디를 순서대로 사진에 배정 */
+let _avMap=null;
+const twAv=n=>{const L=(IMG.twAvatars||[]);
+  if(L.length){if(!_avMap){_avMap={};let k=0;for(const t of [...TW_DAY1,...TW_DAY3,...TW_FAIL,...TW_SUCCESS])if(!(t[0] in _avMap))_avMap[t[0]]=k++}
+    return `<div class="ta2" style="background:#333 url('${L[(_avMap[n]??0)%L.length]}') center/cover"></div>`}
+  return `<div class="ta2" style="background:hsl(${hue(n)} 40% 38%)">${n[0]}</div>`};
 const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
 const av=(n,c='')=>`<div class="av ${c}">${/^\d/.test(n)?ico.person2:n.length<=2?n:n[0]}</div>`;
 const bg=u=>U(u)?`style="background:url('${u}') center/cover"`:'';
@@ -62,7 +68,7 @@ function rMemo(){$('v-memo').innerHTML=`<div class="hd"><button class="pb" oncli
 function openNote(i){ci=i;$('v-note').innerHTML=`<div class="hd"><button class="pb" onclick="saveNote();go('memo')">${ico.back}</button><button class="pb" onclick="saveNote();go('memo')">완료</button></div><textarea id="ta" class="ta" placeholder="메모를 적어보세요">${NT[i]}</textarea>`;go('note');setTimeout(()=>$('ta')&&$('ta').focus(),300)}
 function saveNote(){const e=$('ta');if(!e||ci<0)return;const v=e.value;if(v.trim())NT[ci]=v;else NT.splice(ci,1);ci=-1}
 const hl=x=>x.replace(/(#\S+)/g,'<em>$1</em>');
-function rX(){$('v-x').innerHTML=`<div class="xh"><div class="xa">${ico.person2}</div><div class="xs">⌕ <span>#환승연애</span></div></div><div class="xt"><b class="on">인기</b><b>최신</b><b>사진</b></div><div class="sc x">${curTW.map(t=>`<div class="tw"><div class="ta2" style="background:hsl(${hue(t[0])} 40% 38%)">${t[0][0]}</div><div class="tc"><b>${t[0]}</b> <span>@${handle(t[0])} · ${t[1]}</span><p>${hl(t[4])}</p><div class="act"><span>${XI.re}0</span><span>${XI.rt}${t[3].toLocaleString()}</span><span class="lk" data-l="${t[2]}" onclick="lk(this)">${XI.ht}<i>${t[2].toLocaleString()}</i></span><span>${XI.bm}</span><span>${XI.sh}</span></div></div></div>`).join('')}</div><div class="fab">＋</div><nav class="xn">${[ico.home,ico.search,ico.bell,ico.mail].join('')}</nav>`}
+function rX(){$('v-x').innerHTML=`<div class="xh"><div class="xa">${ico.person2}</div><div class="xs">⌕ <span>#환승연애</span></div></div><div class="xt"><b class="on">인기</b><b>최신</b><b>사진</b></div><div class="sc x">${curTW.map(t=>`<div class="tw">${twAv(t[0])}<div class="tc"><b>${t[0]}</b> <span>@${handle(t[0])} · ${t[1]}</span><p>${hl(t[4])}</p><div class="act"><span>${XI.re}0</span><span>${XI.rt}${t[3].toLocaleString()}</span><span class="lk" data-l="${t[2]}" onclick="lk(this)">${XI.ht}<i>${t[2].toLocaleString()}</i></span><span>${XI.bm}</span><span>${XI.sh}</span></div></div></div>`).join('')}</div><div class="fab">＋</div><nav class="xn">${[ico.home,ico.search,ico.bell,ico.mail].join('')}</nav>`}
 /* X 아이콘 (답글, 리트윗, 하트, 북마크, 공유) */
 const XS=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
 const XI={

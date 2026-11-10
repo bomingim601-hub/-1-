@@ -35,6 +35,9 @@ const IMG = {
   iconMsg:     "icon-msg.webp",
   iconMemo:    "icon-memo.webp",
 
+  /* 트위터(X) 프사 — 아이디마다 하나씩 자동으로 배정돼 (사진 추가/교체는 av 폴더에) */
+  twAvatars: Array.from({length:19},(_,i)=>`av/av${String(i+1).padStart(2,"0")}.jpg`),
+
   /* 유우시 인스타 */
   yushiProfile: "yushi-profile.jpg",
   insta: [                                    // 피드 사진 (6장까지 넣을 수 있어. 지금은 4장)
