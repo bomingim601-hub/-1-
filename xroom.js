@@ -20,16 +20,24 @@ function letterScene(text,nextHtml,map,light){
 
 /* 4일차 X룸 전체 흐름. 끝나면 Promise 종료 */
 function xRoom(){return new Promise(done=>{
-  const seenL=new Set();let seenR=false;
+  const seenL=new Set(),seenO=new Set();let seenR=false;
+  const OPOS=[[5,7,30,-12],[4,50,34,9],[38,9,40,6],[47,44,24,-18]];  /* 서랍 속 물건 위치 [왼쪽, 위, 크기, 기울기] (반지, 키링, 머그, 목도리) */
   const rot=[-4,3,2,-3,4];
   const lookHtml=()=>`<p class="hint">${seenL.size==5||seenR?'다시 ':''}주변을 둘러보세요</p>
     <button class="box" data-a="right">오른쪽으로 고개 돌리기${seenR?' ✓':''}</button>
     <button class="box" data-a="left">왼쪽으로 고개 돌리기${seenL.size==5?' ✓':''}</button>`;
   const M={
-    right(){set(OBJ.map(o=>`<div class="oc">${pic(o[0],'',o[1])}<div><b>${o[1]}</b>${o[2]?`<p>${o[2]}</p>`:''}<p>${o[3]}</p></div></div>`).join('')+`<button class="box" data-a="rdone">다 봤어요</button>`);bindA(scr,M)},
+    right(){set(`<p class="hint">서랍을 눌러 열어보세요</p><button class="drw" data-a="opendr">${pic('drawer','','서랍장')}</button>`);bindA(scr,M)},
+    opendr(){const all=seenO.size==OBJ.length;
+      set(`<p class="hint">${all?'다 꺼내봤어요':`물건을 눌러 꺼내보세요 (${seenO.size}/${OBJ.length})`}</p><div class="tray">${OBJ.map((o,i)=>{const q=OPOS[i];return `<button class="it${seenO.has(i)?' seen':''}" data-i="${i}" data-a="take" style="left:${q[0]}cqw;top:${q[1]}cqw;width:${q[2]}cqw;transform:rotate(${q[3]}deg)">${pic(o[0],'',o[1])}</button>`}).join('')}</div>${all?'<button class="box" data-a="rdone">서랍 닫기</button>':''}`);
+      bindA(scr,{...M,take(b){M.item(+b.dataset.i)}})},
+    item(i){const o=OBJ[i],ov=$('ov');seenO.add(i);
+      ov.innerHTML=`<div class="iv">${pic(o[0],'',o[1])}</div><div class="ivt"><b>${o[1]}</b>${o[2]?`<p>${o[2]}</p>`:''}<p>${o[3]}</p></div><button class="box" data-a="close">다시 넣기</button>`;
+      ov.classList.add('on');bindA(ov,{close(){ov.classList.remove('on');M.opendr()}})},
     rdone(){seenR=true;M.look()},
     look(){if(seenL.size==5&&seenR)return M.desk();set(lookHtml());bindA(scr,M)},
-    left(){set(`<p class="hint">사진을 눌러보세요 (${seenL.size}/5)</p><div class="board" ${bgUrl('cork')}>${POLA.map((p,i)=>`<button class="pol" style="transform:rotate(${rot[i]}deg)" data-i="${i}" data-a="open"><i class="pin"></i>${pic(p[0],i==3?'c':'')}${seenL.has(i)?'<span class="ck">✓</span>':''}</button>`).join('')}</div><button class="box" data-a="look">돌아보기</button>`);
+    left(){const card=i=>`<button class="pol" style="transform:rotate(${rot[i]}deg)" data-i="${i}" data-a="open">${U(IMG.clothespin)?`<img class="cp" src="${IMG.clothespin}" alt="">`:'<i class="pin"></i>'}${pic(POLA[i][0],i==3?'c':'')}${seenL.has(i)?'<span class="ck">✓</span>':''}</button>`;
+      set(`<p class="hint">사진을 눌러보세요 (${seenL.size}/5)</p><div class="board" ${bgUrl('cork')}>${[[0,1],[2,3],[4]].map(r=>`<div class="brow">${r.map(card).join('')}</div>`).join('')}</div><button class="box" data-a="look">돌아보기</button>`);
       bindA(scr,{...M,open(b){M.zoom(+b.dataset.i)}})},
     zoom(i){const p=POLA[i],ov=$('ov');
       ov.innerHTML=`<div class="pv"><div class="fl" id="fl" data-a="flip"><div class="ff">${pic(p[0],i==3?'c':'')}</div><div class="fb" ${bgUrl('linedPaper')}></div></div></div><p class="hint" style="color:#fff">사진을 눌러 뒤집어보세요</p><button class="box" data-a="close">닫기</button>`;

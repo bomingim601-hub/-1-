@@ -11,20 +11,22 @@ const IMG = {
 
   /* 편지 (1일차 X소개서 / 4일차 X룸 같이 사용) */
   envelope:    "envelope.jpg",
-  letterPaper: "letter-paper.jpg",
+  letterPaper: "paper.jpg",
 
   /* X룸 */
   cork:        "cork.jpg",
-  linedPaper:  "lined-paper.jpg",
+  linedPaper:  "paper.jpg",
   polaroid1:   "polaroid1.jpg",        // 음식 먹는 대영
   polaroid2:   "polaroid2.jpg",        // 소파에서 잠든 대영
   polaroid3:   "polaroid3.jpg",        // 바닷가 뒤돌아보는 대영
   polaroid4:   "polaroid4.jpg",        // 네 컷 사진 (세로로 긴 사진은 자동으로 안 잘림)
   polaroid5:   "polaroid5.jpg",        // 따뜻한 음료 든 대영
-  ring:        "ring.jpg",
-  keyring:     "keyring.jpg",
-  mug:         "mug.jpg",
-  scarf:       "scarf.jpg",
+  ring:        "obj-ring.png",
+  keyring:     "obj-keyring.png",
+  mug:         "obj-mug.png",
+  drawer:      "drawer.png",         // 협탁(서랍장)
+  clothespin:  "clothespin.png",     // 폴라로이드 집게
+  scarf:       "obj-scarf.png",
 
   /* 핸드폰 */
   homeWallpaper: "",                          // 홈 화면 배경 (비우면 검정)

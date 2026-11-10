@@ -9,6 +9,7 @@ textarea,input{-webkit-user-select:text;user-select:text}
 #wrap{height:100vh;height:100dvh;display:grid;place-items:center}
 .stage{--w:min(100vw,calc(100dvh*.4615));width:var(--w);height:calc(var(--w)*2.1667);max-height:100dvh;
   position:relative;overflow:hidden;container-type:inline-size;background:#0b0b0f}
+@media(max-width:599px){.stage{width:100vw;height:100dvh;max-height:none}}
 @media(min-width:600px){.stage{border-radius:calc(var(--w)*.06);outline:2px solid #222}}
 
 /* ---------- 게임 화면 ---------- */
@@ -72,7 +73,7 @@ img.c{object-fit:contain!important;background:#c1272d}
 .fl{width:74cqw;height:92cqw;position:relative;transition:transform .6s;transform-style:preserve-3d}.fl.f{transform:rotateY(180deg)}
 .ff,.fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .ff{background:#fff;padding:3.5cqw 3.5cqw 11cqw}.ff img,.ff .ph{width:100%;height:100%;object-fit:cover;display:block}
-.fb{transform:rotateY(180deg);background:#fdf8ef center/cover;padding:8cqw;font-family:"Nanum Pen Script","Apple SD Gothic Neo",cursive;font-size:8cqw;display:grid;place-items:center;color:#2b2118;text-align:center;line-height:1.4}
+.fb{transform:rotateY(180deg);background:#fdf8ef center/cover;padding:8cqw;font-family:"Gaegu","Nanum Pen Script",cursive;font-weight:700;font-size:7.4cqw;display:grid;place-items:center;color:#151515;text-align:center;line-height:1.45;word-break:keep-all;letter-spacing:-.02em}
 
 /* 알람 배너 (게임 화면 위) */
 #alarm{position:absolute;inset:0;z-index:30;display:none;background:#000}
@@ -190,3 +191,35 @@ img.c{object-fit:contain!important;background:#c1272d}
 .in.win{height:52%;flex:none;overflow:hidden;justify-content:flex-end;gap:3cqw;
   -webkit-mask-image:linear-gradient(transparent,#000 22%);mask-image:linear-gradient(transparent,#000 22%)}
 .sub{display:block;margin-top:3cqw;font-size:4.6cqw;letter-spacing:.3em;opacity:.7}
+
+/* 코르크보드: 끈 + 나무 집게 */
+.board{display:flex;flex-direction:column;gap:7cqw;padding:5cqw 2cqw 8cqw}
+.brow{position:relative;display:flex;justify-content:space-around;padding-top:4cqw}
+.brow::before{content:'';position:absolute;left:-2cqw;right:-2cqw;top:0;height:7cqw;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M0 1 Q50 9 100 1' stroke='%23705034' stroke-width='2.2' fill='none' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;
+  filter:drop-shadow(0 .6cqw .5cqw rgba(0,0,0,.4))}
+.brow .pol{transform-origin:50% 0}
+.pol img.cp{position:absolute;top:-6.5cqw;left:50%;width:4.4cqw;aspect-ratio:auto;object-fit:contain;transform:translateX(-50%);z-index:2;filter:drop-shadow(0 .6cqw .6cqw rgba(0,0,0,.45))}
+
+/* 서랍장 */
+.drw{border:0;background:none;padding:0;width:84cqw;cursor:pointer;animation:up .5s both}
+.drw img{width:100%;display:block;filter:drop-shadow(0 3cqw 4cqw rgba(0,0,0,.6))}
+.tray{position:relative;width:88cqw;height:96cqw;flex:none;border:3.5cqw solid #3a2116;border-radius:1.5cqw;
+  background:repeating-linear-gradient(92deg,rgba(0,0,0,.07) 0 .35cqw,transparent .35cqw 2.6cqw),linear-gradient(170deg,#7b4b30,#5a3320);
+  box-shadow:inset 0 4cqw 7cqw rgba(0,0,0,.65),inset 0 -1cqw 3cqw rgba(0,0,0,.4),0 3cqw 6cqw rgba(0,0,0,.6);animation:pull .7s cubic-bezier(.2,.8,.3,1) both}
+@keyframes pull{from{transform:translateY(35cqw) scale(.8);opacity:0}}
+.it{position:absolute;border:0;background:none;padding:0;cursor:pointer;filter:drop-shadow(0 1.6cqw 1.4cqw rgba(0,0,0,.6));transition:filter .3s}
+.it img{width:100%;display:block}.it .ph{width:100%;aspect-ratio:1}
+.it.seen{filter:drop-shadow(0 1.6cqw 1.4cqw rgba(0,0,0,.6)) brightness(.72)}
+.iv{animation:lift .45s cubic-bezier(.2,.9,.3,1.2) both}
+.iv img{max-width:60cqw;max-height:54cqw;display:block;filter:drop-shadow(0 3cqw 4cqw rgba(0,0,0,.7))}
+@keyframes lift{from{transform:translateY(25cqw) scale(.6);opacity:0}}
+.ivt{color:#fff;text-align:center;padding:0 9cqw;word-break:keep-all}.ivt b{font-size:5.6cqw}.ivt p{margin:2cqw 0 0;font-size:4.2cqw;line-height:1.6;opacity:.9}
+
+/* 제작진 문자 알림 (아이폰 스타일) */
+.al.ios{background:rgba(250,249,246,.97);color:#111;padding:4cqw 4.5cqw;position:absolute}
+.al.ios .av{flex:none;position:relative;width:12.5cqw;height:12.5cqw;border-radius:50%;background:linear-gradient(#a3aec4,#7a86a3);color:#fff;font-size:5.8cqw;font-weight:600;display:grid;place-items:center}
+.al.ios .av i{position:absolute;right:-1cqw;bottom:-1cqw;width:5.6cqw;height:5.6cqw;border-radius:1.6cqw;background:#34c759;overflow:hidden;border:.5cqw solid #faf9f6;display:grid;place-items:center}
+.al.ios .av i svg,.al.ios .av i img{width:100%;height:100%}
+.al.ios b{font-size:4.4cqw}.al.ios span{opacity:1;color:#222}
+.al.ios em{position:absolute;top:4cqw;right:5cqw;font-style:normal;font-size:3.6cqw;color:#8a8a8e}

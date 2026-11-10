@@ -36,7 +36,9 @@ async function story(lines,o={}){
 /* 위쪽 알람 배너. 눌러야 넘어감 */
 function alarm(title,sub='',o={}){return new Promise(res=>{
   const icon=U(IMG.iconMsg)?`<img src="${IMG.iconMsg}" style="width:100%;height:100%">`:'<svg viewBox="0 0 24 24"><path fill="#fff" d="M12 4C7 4 3 7.3 3 11.5c0 2.3 1.2 4.3 3 5.7L5.5 21l4-2.2c.8.2 1.6.3 2.5.3 5 0 9-3.3 9-7.6S17 4 12 4z"/></svg>';
-  alarmEl.innerHTML=`<button class="al" id="alb"><div class="ai">${icon}</div><div><b>${title}</b>${sub?`<span>${sub}</span>`:''}</div></button>`;
+  alarmEl.innerHTML=o.from
+    ?`<button class="al ios" id="alb"><div class="av">${o.from[0]}<i>${icon}</i></div><div><b>${o.from}</b><span>${title}</span>${sub?`<span>${sub}</span>`:''}</div><em>지금</em></button>`
+    :`<button class="al" id="alb"><div class="ai">${icon}</div><div><b>${title}</b>${sub?`<span>${sub}</span>`:''}</div></button>`;
   alarmEl.classList.add('on');const b=$('alb');
   setTimeout(()=>{b.classList.add('on');playDing()},250);
   b.onclick=()=>{b.classList.remove('on');setTimeout(()=>{alarmEl.classList.remove('on');alarmEl.innerHTML='';res()},300)};
@@ -63,7 +65,7 @@ async function afterVote(d,o={}){
     await alarm(ALARM_PICKED,ALARM_PICKED_MSG);
     if(o.tweets){await black(1200);await alarm('메시지',ALARM_CHECK)}
   }else{
-    await alarm(ALARM_NOPICK,o.tweets?ALARM_CHECK:'');
+    await alarm(ALARM_NOPICK,o.tweets?ALARM_CHECK:'',{from:'제작진'});
   }
   if(o.tweets)await Phone.open(o.tweets);
 }
@@ -137,7 +139,7 @@ async function d5(){
   await black(300);
   const tw=st.lie?TW_SUCCESS:TW_FAIL;
   if(ok){await alarm('메시지',ALARM_CHECK)}
-  else{await say('1시간 후',1500);await alarm(ALARM_NOPICK,ALARM_CHECK)}
+  else{await say('1시간 후',1500);await alarm(ALARM_NOPICK,ALARM_CHECK,{from:'제작진'})}
   await Phone.open(tw);
   await black(600);
   if(ok)end(SETTINGS.endingTitle,SETTINGS.endingText,true);
