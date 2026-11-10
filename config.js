@@ -89,7 +89,7 @@ const SOUND = {
 };
 
 const SETTINGS = {
-  hiddenIdleSeconds: 10,     // 성공엔딩에서 가만히 두면 히든이 나오는 시간(초)
+  hiddenIdleSeconds: 3,      // 성공엔딩에서 가만히 두면 히든이 나오는 시간(초)
   endingTitle: "해피엔딩",
   endingText:  "대영과 유우시는 서로의 손을 잡고 함께 프로그램을 나갑니다.",
   badTitle:    "새로운 시작",

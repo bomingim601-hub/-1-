@@ -40,10 +40,10 @@ function smsAsk(kind,opts,o={}){return new Promise(async done=>{
   if(!el){el=document.createElement('div');el.id='sms';document.getElementById('stage').appendChild(el)}
   const now=new Date(),hm=`오후 ${((now.getHours()+11)%12)+1}:${String(now.getMinutes()).padStart(2,'0')}`;
   el.innerHTML=`<div class="q-sh"><span class="q-sbk">${smsIco.back}</span><div class="q-sp"><div class="q-sav">제</div><div class="q-snm">제작진 <i>›</i></div></div><span class="q-scm">${smsIco.cam}</span></div>
-    <div class="q-sb" id="qsb"><p class="q-sdt">오늘 ${hm}</p><div class="q-bl q-in">${(SMS_TEXT[kind]||kind).replace(/\n/g,'<br>')}</div></div>
+    <div class="q-sb" id="qsb">${(o.log||[]).map(l=>`<p class="q-sdt">${l.day}일차 오후 10:00</p><div class="q-bl q-in">${(SMS_TEXT[l.kind]||'').replace(/\n/g,'<br>')}</div><div class="q-bl q-out q-old">${l.name}</div><p class="q-sread">읽음</p>`).join('')}<p class="q-sdt">${o.day?o.day+'일차 · ':''}오늘 ${hm}</p><div class="q-bl q-in">${(SMS_TEXT[kind]||kind).replace(/\n/g,'<br>')}</div></div>
     <div class="q-sf"><div class="q-sch" id="qsch"></div><p class="q-snote" id="qsnote"></p>
       <div class="q-sin"><span class="q-spl">＋</span><div class="q-sbox"><span id="qstx"></span><i class="q-scur"></i><span class="q-sph" id="qsph">iMessage</span><button class="q-ssend" id="qssend">${smsIco.up}</button></div></div></div>`;
-  el.classList.add('on');
+  el.classList.add('on');requestAnimationFrame(()=>{const sb=$('qsb');sb.scrollTop=1e5});
   const chips=()=>{$('qsch').innerHTML=opts.map((t,i)=>`<button class="q-chip${dis.has(i)?' off':''}${glow.includes(i)?' glow':''}" data-i="${i}">${t}</button>`).join('');
     $('qsch').querySelectorAll('.q-chip').forEach(b=>b.onclick=()=>pick(+b.dataset.i))};
   let busy=false;
@@ -55,8 +55,8 @@ function smsAsk(kind,opts,o={}){return new Promise(async done=>{
     if(o.reject===i){await sleep(500);await erase(t);$('qsnote').textContent=o.rejectText||'';$('qsnote').classList.add('on');
       await sleep(1900);$('qsnote').classList.remove('on');dis.add(i);if(o.onReject)o.onReject(i);chips();$('qsch').classList.remove('lock');busy=false;return}
     $('qssend').classList.add('press');sendSound();show('');
-    const b=document.createElement('div');b.className='q-bl q-out';b.textContent=t;$('qsb').appendChild(b);
-    await sleep(700);const r=document.createElement('p');r.className='q-sread';r.textContent='전송됨';$('qsb').appendChild(r);
+    const b=document.createElement('div');b.className='q-bl q-out';b.textContent=t;$('qsb').appendChild(b);$('qsb').scrollTop=1e5;
+    await sleep(700);const r=document.createElement('p');r.className='q-sread';r.textContent='전송됨';$('qsb').appendChild(r);$('qsb').scrollTop=1e5;
     await sleep(1100);el.classList.remove('on');done(i)}
   chips();
 })}

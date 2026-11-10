@@ -355,3 +355,5 @@ img.c{object-fit:contain!important;background:#c1272d}
 .pcl{display:block;width:12cqw;height:.5cqw;background:#b99449;margin:5cqw auto}
 .pci{margin:0;font-family:"Gowun Batang",serif;font-size:4.8cqw;line-height:1.8;word-break:keep-all}
 .pcs{margin:7cqw 0 0;display:inline-block;padding:1cqw 3cqw;border:.4cqw solid #b0423a;color:#b0423a;border-radius:1cqw;font-size:3.4cqw;font-weight:700;transform:rotate(-6deg);letter-spacing:.1em}
+
+.q-bl.q-out.q-old{animation:none}

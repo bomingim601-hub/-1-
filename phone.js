@@ -48,7 +48,7 @@ const av=(n,c='')=>`<div class="av ${c}">${/^\d/.test(n)?ico.person2:n.length<=2
 const bg=u=>U(u)?`style="background:url('${u}') center/cover"`:'';
 const R={home:rHome,call:rCall,msg:rMsg,memo:rMemo,ig:rIG,dm:rDM,x:rX,lock:rLock};
 function go(n){if(cur==='note'&&n!=='memo'&&$('ta'))saveNote();(R[n]||(()=>{}))();document.querySelectorAll('.v').forEach(v=>v.classList.toggle('on',v.id==='v-'+n));P.dataset.t={home:'l',x:'l',lock:'l',calling:'l'}[n]||'d';cur=n}
-function rHome(){const a=[['call','전화',`${iconImg('iconCall','#34c759',ico.ph)}`,0],['msg','메시지',`${iconImg('iconMsg','#34c759',ico.ph)}`,0],['memo','메모',`${iconImg('iconMemo','#ffd60a',ico.home)}`,0],['x','X',xI(),0]];if(igOn)a.splice(3,0,['dm','인스타그램',igI(),1]);
+function rHome(){const a=[['call','전화',`${iconImg('iconCall','#34c759',ico.ph)}`,0],['msg','메시지',`${iconImg('iconMsg','#34c759',ico.ph)}`,0],['memo','메모',`${iconImg('iconMemo','#ffd60a',ico.home)}`,0],['x','X',xI(),0]];if(igOn)a.splice(3,1,['dm','인스타그램',igI(),1]);
 $('v-home').style.backgroundImage=U(IMG.homeWallpaper)?`url('${IMG.homeWallpaper}')`:'';
 $('v-home').innerHTML=`<div class="homehint">아래 바를 눌러(또는 위로 쓸어) 핸드폰 닫기</div><div class="apps">${a.map(x=>`<button class="ap" onclick="go('${x[0]}')"><div class="ic">${x[2]}</div>${x[3]?'<i class="bd">1</i>':''}${x[1]}</button>`).join('')}</div>`}
 const tabbar=()=>`<nav class="tb">${[['fav','즐겨찾기',ico.star],['rec','최근 통화',ico.clock],['ct','연락처',ico.person],['kp','키패드',ico.keypad],['vm','음성 사서함',ico.vm]].map(t=>`<button class="${tab==t[0]?'on':''}" onclick="tab='${t[0]}';rCall()">${t[2]}${t[1]}</button>`).join('')}</nav>`;

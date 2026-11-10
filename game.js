@@ -5,7 +5,7 @@
 const scr=$('scr'),fadeEl=$('fade'),alarmEl=$('alarm'),stage=$('stage');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let st,idleT=null,idleOff=null;
-const newState=()=>({y:{},lie:0,pr:0});   // y: 일차별로 유우시를 눌렀는지 / lie: 3일차 거짓 / pr: 퍼스널룸에서 유우시
+const newState=()=>({y:{},lie:0,pr:0,sms:[]});   // y: 일차별로 유우시를 눌렀는지 / lie: 3일차 거짓 / pr: 퍼스널룸에서 유우시
 
 /* ---------- 화면 도구 ---------- */
 function set(h,o={}){
@@ -75,7 +75,9 @@ async function dayCard(n,sub=''){await black(0);await say(`<span class="big">${n
 /* 문자 투표: 유우시를 누르면 '이제 잊기로 했잖아...' 후 유우시 칸이 까맣게 */
 async function vote(d){
   const Y=NAMES.length-1;
-  return smsAsk('vote',NAMES,{reject:Y,rejectText:FORGET,onReject:()=>{st.y[d]=1}});
+  const i=await smsAsk('vote',NAMES,{reject:Y,rejectText:FORGET,onReject:()=>{st.y[d]=1},log:st.sms,day:d});
+  st.sms.push({day:d,kind:'vote',name:NAMES[i]});
+  return i;
 }
 /* 투표 후: 1시간 후 → 알람 (→ 핸드폰) */
 async function afterVote(d,o={}){
@@ -159,7 +161,7 @@ async function d5(){
   await dayCard(5);
   const ok=!!(st.lie&&st.pr&&st.y[1]&&st.y[2]&&st.y[3]&&st.y[4]);
   const Y=NAMES.length-1,others=NAMES.map((_,i)=>i).filter(i=>i!=Y);
-  await smsAsk('final',NAMES,ok?{dis:others,glow:[Y]}:{dis:[Y]});
+  await smsAsk('final',NAMES,ok?{dis:others,glow:[Y],log:st.sms,day:5}:{dis:[Y],log:st.sms,day:5});
   await black(300);
   const tw=st.lie?TW_SUCCESS:TW_FAIL;
   if(ok){await alarm('메시지',ALARM_CHECK)}
@@ -185,6 +187,8 @@ function end(t,d,hid){
 async function runHidden(){
   stopIdle();
   await black(500);
+  await say(HIDDEN_WAIT,2200);
+  await black(600);
   await Phone.openHidden();          // 폰 아래 바로 닫으면 끝
   end(SETTINGS.endingTitle,SETTINGS.endingText,false);
 }
