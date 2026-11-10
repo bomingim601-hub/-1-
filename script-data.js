@@ -63,6 +63,16 @@ const INSTA_POSTS = [
   ["강아지",   47, "2025년 5월 19일", "yugeon_han",   ["drawn-dog","cream-dog","white-bear"]],
   ["^_^",      29, "2025년 3월 8일",  "dogyeom.s",    ["glasses-rilakkuma","pixel-pray","crying-bear"]]
 ];
+/* 인스타 홈 피드 카드뉴스 게시물 (feed 폴더 사진, 옆으로 넘기기) */
+const FEED_POST = {
+  user: "couple.pick_",
+  av: "av/sarang.jpg",
+  cards: ["feed/card1.jpg","feed/card2.jpg","feed/card3.jpg","feed/card4.jpg","feed/card5.jpg","feed/card6.jpg"],
+  likes: 3842, comments: 217,
+  liker: "yushi", likerAvs: ["av/letter-y.jpg","av/seal.jpg","av/bear-beige.jpg"],
+  caption: "꽁냥미 넘치는 커플 유튜버 추천 💕 토쿠토쿠 유튜브 보러가자!! #커플유튜버 #토쿠토쿠 #대구녀",
+  date: "11월 2일"
+};
 const X_MSG = {
   3: "대영 왜 거짓말로 알려줬어?",
   4: "내일이 마지막이네"

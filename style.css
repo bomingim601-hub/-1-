@@ -381,3 +381,14 @@ img.c{object-fit:contain!important;background:#c1272d}
 .igpc{margin:1.4cqw 4cqw 0;font-size:4.2cqw}
 .igpt2{margin:1.4cqw 4cqw 0;font-size:3.4cqw;color:#8e8e8e}
 .gr div{cursor:pointer}
+
+/* 인스타 홈 피드 */
+.igfh{position:absolute;top:13cqw;left:4cqw;right:4cqw;height:13cqw;display:flex;align-items:center;justify-content:space-between;z-index:5}
+.igfl{font-family:"Brush Script MT","Snell Roundhand","Segoe Script",cursive;font-size:8cqw;font-weight:400}
+.igfh span{display:flex;gap:5cqw}.igfh svg{width:7.4cqw;height:7.4cqw}
+.igfs{top:27cqw;padding:0 0 34cqw}
+.igcw{position:relative}
+.igcar{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.igcar::-webkit-scrollbar{display:none}
+.igc{flex:none;width:100%;aspect-ratio:1;background:#eee center/cover;scroll-snap-align:start}
+.igfn{z-index:6}
