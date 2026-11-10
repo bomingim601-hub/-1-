@@ -51,7 +51,7 @@ const twAv=n=>{const F=(IMG.twFixed||{})[n];if(F&&F.av)return `<div class="ta2" 
 const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
 const av=(n,c='')=>`<div class="av ${c}">${/^\d/.test(n)?ico.person2:n.length<=2?n:n[0]}</div>`;
 const bg=u=>U(u)?`style="background:url('${u}') center/cover"`:'';
-const R={igp:()=>{},igf:()=>{},home:rHome,call:rCall,msg:rMsg,memo:rMemo,ig:rIG,dm:rDM,x:rX,lock:rLock};
+const R={igp:()=>{},igf:()=>{},igr:()=>{},igs:()=>{},igme:()=>{},home:rHome,call:rCall,msg:rMsg,memo:rMemo,ig:rIG,dm:rDM,x:rX,lock:rLock};
 function go(n){if(cur==='note'&&n!=='memo'&&$('ta'))saveNote();(R[n]||(()=>{}))();document.querySelectorAll('.v').forEach(v=>v.classList.toggle('on',v.id==='v-'+n));P.dataset.t={home:'l',x:'l',lock:'l',calling:'l'}[n]||'d';cur=n}
 function rHome(){const a=[['call','전화',`${iconImg('iconCall','#34c759',ico.ph)}`,0],['msg','메시지',`${iconImg('iconMsg','#34c759',ico.ph)}`,0],['memo','메모',`${iconImg('iconMemo','#ffd60a',ico.home)}`,0],['x','X',xI(),0]];if(igOn)a.splice(3,1,['dm','인스타그램',igI(),1]);
 $('v-home').style.backgroundImage=U(IMG.homeWallpaper)?`url('${IMG.homeWallpaper}')`:'';
@@ -97,7 +97,7 @@ const XI={
 };
 function tg(e){const on=e.classList.toggle('on'),i=e.querySelector('i');if(i)i.textContent=(+e.dataset.n+(on?1:0)).toLocaleString()}
 function rIG(){const g=IMG.insta.map((u,i)=>`<div ${bg(u)} onclick="openPost(${i})">${U(u)?'':'대영 사진 '+(i+1)}</div>`).join('');
-$('v-ig').innerHTML=`<div class="hd"><button class="pb" onclick="go('dm')">${ico.back}</button><span>🔒 yushi</span><b style="font-size:6cqw;width:11cqw;text-align:center">⋯</b></div><div class="sc" style="padding:0 0 30cqw"><div class="pr"><div class="pa" ${bg(IMG.yushiProfile)}>${U(IMG.yushiProfile)?'':ico.person2.replace('<svg','<svg width="50%" fill="#aaa"')}</div><div class="st"><div><b>${IMG.insta.length}</b>게시물</div><div><b>128</b>팔로워</div><div><b>97</b>팔로잉</div></div></div><div style="padding:0 5cqw;font-size:4.2cqw"><b>유우시</b></div><div class="bt"><button>팔로잉</button><button onclick="go('dm')">메시지</button></div><div class="gr">${g}</div></div><nav class="tb"><button class="on" style="background:none;color:#111" onclick="openFeed()">${ico.home.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2"')}</button><button>${ico.reel.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2"')}</button><button>${ico.send.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2"')}</button><button>${ico.search.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2.4"')}</button><button class="on"><div class="av s ni8" ${bg(IMG.yushiProfile)}></div></button></nav>`}
+$('v-ig').innerHTML=`<div class="hd"><button class="pb" onclick="go('dm')">${ico.back}</button><span>🔒 yushi</span><b style="font-size:6cqw;width:11cqw;text-align:center">⋯</b></div><div class="sc" style="padding:0 0 30cqw"><div class="pr"><div class="pa" ${bg(IMG.yushiProfile)}>${U(IMG.yushiProfile)?'':ico.person2.replace('<svg','<svg width="50%" fill="#aaa"')}</div><div class="st"><div><b>${IMG.insta.length}</b>게시물</div><div><b>128</b>팔로워</div><div><b>97</b>팔로잉</div></div></div><div style="padding:0 5cqw;font-size:4.2cqw"><b>유우시</b></div><div class="bt"><button>팔로잉</button><button onclick="go('dm')">메시지</button></div><div class="gr">${g}</div></div>${igNav('')}`}
 const DMS=[];
 const dmTime=()=>{const d=new Date(),h=d.getHours();return (h<12?'오전 ':'오후 ')+(h%12||12)+':'+String(d.getMinutes()).padStart(2,'0')};
 const dg=x=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${x}</svg>`;
@@ -157,7 +157,35 @@ function openFeed(){if(typeof FEED_POST==='undefined')return;const f=FEED_POST,n
   <div class="igpa"><span class="ilk" data-n="${f.likes}" onclick="tg(this)">${IGI.ht}<i>${f.likes.toLocaleString()}</i></span><span>${IGI.cm}<i>${f.comments}</i></span><span>${IGI.sd}</span><span class="ibm" onclick="tg(this)">${IGI.bm}</span></div>
   <div class="igpl"><b>좋아요 ${f.likes.toLocaleString()}개</b></div>
   <p class="igpc"><b>${f.user}</b> ${f.caption}</p><p class="igpt2">${f.date}</p></div>
-  <nav class="tb igfn"><button style="background:none;color:#111">${ico.home.replace('<svg','<svg fill="currentColor"')}</button><button>${ico.reel.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2"')}</button><button onclick="go('dm')">${ico.send.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2"')}</button><button>${ico.search.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2.4"')}</button><button onclick="go('ig')"><div class="av s ni8" ${bg(IMG.yushiProfile)}></div></button></nav>`;
+  ${igNav('home')}`;
   go('igf');
   const c=$('igcar');c.onscroll=()=>{const k=Math.round(c.scrollLeft/c.clientWidth);$('igcn').textContent=`${k+1}/${n}`;$('igcd').querySelectorAll('i').forEach((d,j)=>d.classList.toggle('on',j==k))};
 }
+
+/* ===== 인스타 아래 메뉴 (홈 / 릴스 / DM / 검색 / 내 프로필=대영) ===== */
+const ME_ID=(typeof IG_ME!=='undefined'&&IG_ME.id)||'daeyoung_';
+function igNav(a){const st=(on,svg,w)=>svg.replace('<svg',on?'<svg fill="currentColor"':`<svg fill="none" stroke="currentColor" stroke-width="${w||2}"`);
+  return `<nav class="tb igfn${a=='reel'?' igdk':''}"><button onclick="openFeed()">${st(a=='home',ico.home)}</button><button onclick="openReels()">${st(a=='reel',ico.reel)}</button><button onclick="go('dm')">${st(0,ico.send)}</button><button onclick="openSearch()">${st(0,ico.search,a=='search'?3:2.4)}</button><button onclick="openMe()"><div class="av s ni8 meav${a=='me'?' on':''}">${ico.person2}</div></button></nav>`}
+const defAv=s=>`<div class="pa" style="background:#c7c7cc;overflow:hidden">${ico.person2.replace('<svg','<svg width="'+(s||'78%')+'" fill="#fff" style="margin-top:28%"')}</div>`;
+
+/* 릴스 */
+function openReels(){const R=typeof REELS!=='undefined'?REELS:[];
+  $('v-igr').innerHTML=`<div class="rlh"><b>릴스 ⌄</b><span>${ico.search.replace('<svg','<svg fill="none" stroke="#fff" stroke-width="2.4"')}</span></div><div class="rls">${R.map((r,i)=>`<div class="rl" style="--a:${r.c[0]};--b:${r.c[1]};--c:${r.c[2]}"><div class="rlbg"></div>
+    <div class="rlwave">${Array.from({length:23},(_,k)=>`<i style="animation-delay:${(k*67%700)}ms"></i>`).join('')}</div>
+    <div class="rlt"><small>${r.top}</small><b>${r.title}</b><span>${r.sub}</span></div>
+    <div class="rlr"><span class="ilk" data-n="${r.likes}" onclick="tg(this)">${IGI.ht}<i>${r.likes.toLocaleString()}</i></span><span>${IGI.cm}<i>${r.cm}</i></span><span>${IGI.sd}<i>${r.sh}</i></span><span style="font-size:6cqw;line-height:1">⋯</span><div class="rlc" style="background:linear-gradient(135deg,${r.c[0]},${r.c[2]})"></div></div>
+    <div class="rlu"><p><span class="rlav" style="background:linear-gradient(135deg,${r.c[1]},${r.c[0]})">${r.user[0].toUpperCase()}</span><b>${r.user}</b><button>팔로우</button></p><p class="rlcap">${r.cap}</p><p class="rlau">♫ ${r.audio}</p></div></div>`).join('')}</div>${igNav('reel')}`;
+  go('igr')}
+
+/* 검색: 입력하면 유우시/대영 아이디만 나옴 */
+function openSearch(){$('v-igs').innerHTML=`<div class="igsh"><div class="igsb">${ico.search.replace('<svg','<svg fill="none" stroke="#8e8e8e" stroke-width="2.4"')}<input id="igq" placeholder="검색" autocomplete="off" oninput="igSearch(this.value)"></div></div><div class="sc igsr" id="igsr"><p class="igse">최근 검색 항목이 없습니다.</p></div>${igNav('search')}`;go('igs');setTimeout(()=>$('igq')&&$('igq').focus(),300)}
+function igSearch(q){q=q.trim().toLowerCase();const L=[{id:'yushi',nm:'유우시',k:'yushi 유우시 우시 yu',me:0},{id:ME_ID,nm:(typeof IG_ME!=='undefined'&&IG_ME.name)||'김대영',k:ME_ID+' 김대영 대영 dae',me:1}];
+  const r=q?L.filter(u=>u.k.toLowerCase().includes(q)):[];
+  $('igsr').innerHTML=q?(r.length?r.map(u=>`<div class="igsu" onclick="${u.me?'openMe()':"go('ig')"}">${u.me?defAv('70%'):`<div class="pa" ${bg(IMG.yushiProfile)}></div>`}<div><b>${u.id}</b><small>${u.nm}${u.me?'':' · 팔로잉'}</small></div></div>`).join(''):`<p class="igse">"${q}"에 대한 결과가 없습니다.</p>`):'<p class="igse">최근 검색 항목이 없습니다.</p>'}
+
+/* 내 프로필 (대영) */
+function openMe(){const M=typeof IG_ME!=='undefined'?IG_ME:{id:'daeyoung_',name:'김대영',followers:335,following:332};
+  $('v-igme').innerHTML=`<div class="hd"><span style="width:11cqw"></span><span>${M.id} ⌄</span><b style="font-size:6cqw;width:11cqw;text-align:center">☰</b></div><div class="sc" style="padding:0 0 30cqw"><div class="pr">${defAv()}<div class="st"><div><b>0</b>게시물</div><div><b>${M.followers}</b>팔로워</div><div><b>${M.following}</b>팔로잉</div></div></div><div style="padding:0 5cqw;font-size:4.2cqw"><b>${M.name}</b></div><div class="bt"><button>프로필 편집</button><button>프로필 공유</button></div>
+  <div class="igtab"><span class="on">${dg('<rect x="3.5" y="3.5" width="17" height="17" rx="1"/><path d="M3.5 9.2h17M3.5 14.8h17M9.2 3.5v17M14.8 3.5v17"/>')}</span><span>${ico.reel.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="1.8"')}</span><span>${dg('<rect x="3.5" y="3.5" width="17" height="17" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.5c1.2-2.4 3.2-3.5 5.5-3.5s4.3 1.1 5.5 3.5"/>')}</span></div>
+  <div class="igempty"><div class="igcam">${dg('<path d="M4 8h3l1.6-2.4h6.8L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.4"/>')}</div><b>게시물 없음</b></div></div>${igNav('me')}`;
+  go('igme')}
