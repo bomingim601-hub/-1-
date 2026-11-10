@@ -65,7 +65,8 @@ async function afterVote(d,o={}){
     await alarm(ALARM_PICKED,ALARM_PICKED_MSG);
     if(o.tweets){await black(1200);await alarm('메시지',ALARM_CHECK)}
   }else{
-    await alarm(ALARM_NOPICK,o.tweets?ALARM_CHECK:'',{from:'제작진'});
+    await alarm(ALARM_NOPICK,'',{from:'제작진'});
+    if(o.tweets){await sleep(600);await alarm('메시지',ALARM_CHECK)}
   }
   if(o.tweets)await Phone.open(o.tweets);
 }
@@ -139,7 +140,7 @@ async function d5(){
   await black(300);
   const tw=st.lie?TW_SUCCESS:TW_FAIL;
   if(ok){await alarm('메시지',ALARM_CHECK)}
-  else{await say('1시간 후',1500);await alarm(ALARM_NOPICK,ALARM_CHECK,{from:'제작진'})}
+  else{await say('1시간 후',1500);await alarm(ALARM_NOPICK,'',{from:'제작진'});await sleep(600);await alarm('메시지',ALARM_CHECK)}
   await Phone.open(tw);
   await black(600);
   if(ok)end(SETTINGS.endingTitle,SETTINGS.endingText,true);
