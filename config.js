@@ -24,6 +24,7 @@ const IMG = {
   ring:        "obj-ring.png",
   keyring:     "obj-keyring.png",
   mug:         "obj-mug.png",
+  wood:        "wood.jpg",           // 키워드 데이트 카드가 놓인 책상
   desk:        "desk.jpg",           // 책상 위 (메모 놓이는 곳)
   drawer:      "drawer.png",         // 협탁(서랍장)
   clothespin:  "clothespin.png",     // 폴라로이드 집게
@@ -82,7 +83,8 @@ const IMG = {
 };
 
 const SOUND = {
-  send: "send.mp3",   // 문자 보낼 때 "슝" 소리
+  send: "send.mp3",
+  tick: "tick.mp3",   // 문자 타자 소리   // 문자 보낼 때 "슝" 소리
   ding: "ding.mp3"    // 알람 효과음. 파일이 없으면 기본 '띵' 소리가 대신 나와
 };
 

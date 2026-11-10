@@ -288,3 +288,28 @@ img.c{object-fit:contain!important;background:#c1272d}
 .mclip{position:absolute;top:-2cqw;left:50%;width:3.4cqw;height:7cqw;margin-left:-1.7cqw;border:.6cqw solid #9aa0a6;border-radius:2cqw;border-bottom-color:transparent}
 .mbig{width:84cqw;max-height:140cqw;overflow-y:auto;background:#fffdf6 center/cover;padding:9cqw 7cqw;transform:rotate(-1.5deg);box-shadow:0 3cqw 6cqw rgba(0,0,0,.6);
   font-family:"Gaegu","Nanum Pen Script",cursive;font-weight:700;font-size:4.5cqw;line-height:1.7;color:#1d1d1d;white-space:pre-line;text-align:left;word-break:keep-all;animation:lift .45s cubic-bezier(.2,.9,.3,1.2) both}
+
+/* 편지봉투에서 편지 꺼내기 */
+.envw{position:relative;width:82cqw;aspect-ratio:500/346;cursor:pointer;animation:float 2.4s ease-in-out infinite;filter:drop-shadow(0 2cqw 3cqw rgba(0,0,0,.35))}
+.envw i{position:absolute;inset:0;display:block}
+.envw .eb{background:var(--e) center/cover;filter:brightness(.72)}
+.envw .el{inset:6% 7% 10%;z-index:1;opacity:0;background:var(--p) center/cover;box-shadow:0 0 2cqw rgba(0,0,0,.15);transition:transform 1.1s cubic-bezier(.3,.8,.3,1)}
+.envw .ef{background:var(--e) center/cover;clip-path:polygon(0 4%,50% 70%,100% 4%,100% 100%,0 100%);z-index:2}
+.envw .et{background:var(--e) center/cover;clip-path:polygon(0 0,100% 0,50% 72%);z-index:3;transform-origin:50% 0;transition:transform .6s ease-in,filter .6s;filter:drop-shadow(0 .6cqw .6cqw rgba(0,0,0,.25))}
+.envw.o1{animation:none}
+.envw.o1 .et{transform:scaleY(-1);filter:brightness(.85);z-index:0}
+.envw.o1 .el{opacity:1}
+.envw.o2 .el{transform:translateY(-62%)}
+.envw.o3{transition:opacity .45s,transform .45s;opacity:0;transform:translateY(-10cqw) scale(1.08)}
+/* 키워드 데이트 카드 */
+#scr.woodbg{background-size:cover}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:6cqw 5cqw;width:100%;padding:4cqw 3cqw;perspective:200cqw}
+.kc{position:relative;aspect-ratio:3/4;border:0;border-radius:2.4cqw;background:#fbf7ee url('paper.jpg') center/cover;color:#2b2118;cursor:pointer;
+  transform:rotate(var(--r)) translateY(var(--y));box-shadow:.6cqw 1.8cqw 2.6cqw rgba(40,20,5,.45);transition:transform .7s cubic-bezier(.2,.9,.3,1.1),opacity .5s,box-shadow .5s;
+  animation:deal .55s cubic-bezier(.2,.9,.3,1.1) both}
+.kc::before{content:'';position:absolute;inset:2.4cqw;border:.4cqw solid rgba(120,80,40,.35);border-radius:1.4cqw}
+.kc span{position:absolute;inset:0;display:grid;place-items:center;font-family:"Gowun Batang",serif;font-weight:700;font-size:5.6cqw;letter-spacing:.05em}
+@keyframes deal{from{transform:translateY(60cqw) rotate(20deg);opacity:0}}
+.kc.away{opacity:0;transform:rotate(var(--r)) translateY(30cqw) scale(.8);pointer-events:none}
+.kc.pick{z-index:5;transform:rotate(0) scale(1.35) translateY(-4cqw);box-shadow:0 5cqw 8cqw rgba(30,15,0,.55)}
+#scr.woodbg .q{color:#fff;text-shadow:0 .4cqw 1.5cqw rgba(0,0,0,.6)}#scr.woodbg .hint{color:#fff;opacity:.85;text-shadow:0 .3cqw 1cqw rgba(0,0,0,.6)}

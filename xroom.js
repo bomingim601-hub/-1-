@@ -7,9 +7,10 @@ function bindA(root,map){root.querySelectorAll('[data-a]').forEach(b=>b.onclick=
 
 /* 편지봉투 → 편지지. nextHtml 은 편지를 끝까지 내리면 서서히 나타남 */
 function letterScene(text,nextHtml,map,light){
-  set(U(IMG.envelope)?`<img class="env" src="${IMG.envelope}" data-a="open"><p class="hint">편지를 눌러보세요</p>`
-                      :`<div class="envph" data-a="open">✉️</div><p class="hint">편지를 눌러보세요</p>`,{light});
-  bindA(scr,{open(){
+  const E=U(IMG.envelope)?`url('${IMG.envelope}')`:'#e2d4b8',Pp=U(IMG.letterPaper)?`url('${IMG.letterPaper}')`:'#fdf8ef';
+  set(`<div class="envw" data-a="open" style="--e:${E};--p:${Pp}"><i class="eb"></i><i class="el"></i><i class="ef"></i><i class="et"></i></div><p class="hint">편지를 눌러보세요</p>`,{light});
+  let opened=false;
+  bindA(scr,{async open(b){if(opened)return;opened=true;b.classList.add('o1');await sleep(650);b.classList.add('o2');await sleep(1100);b.classList.add('o3');await sleep(500);
     set(`<div class="sheet" ${bgUrl('letterPaper')}></div><div class="nx" id="nx">${nextHtml}</div>`,{light});
     scr.querySelector('.sheet').textContent=text;
     bindA(scr,map);

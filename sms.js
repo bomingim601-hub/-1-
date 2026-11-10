@@ -8,12 +8,12 @@ const SMS_TEXT = {
 };
 
 /* 소리: 타자(합성음) + 전송(send.mp3) */
-let _sac;
-function keyTick(){try{_sac=_sac||new(window.AudioContext||window.webkitAudioContext)();const c=_sac,t=c.currentTime,
-  b=c.createBuffer(1,c.sampleRate*.03,c.sampleRate),d=b.getChannelData(0);
-  for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,6);
-  const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();f.type='highpass';f.frequency.value=1800;
-  g.gain.value=.35;s.buffer=b;s.connect(f);f.connect(g);g.connect(c.destination);s.start(t)}catch(e){}}
+/* 아이폰 무음모드에서도 들리도록 <audio>로 재생 (여러 개 돌려가며) */
+const _tick=[...Array(6)].map(()=>{const a=new Audio(SOUND.tick||'tick.mp3');a.preload='auto';a.volume=.7;return a});let _ti=0;
+function keyTick(){try{const a=_tick[_ti++%_tick.length];a.currentTime=0;a.play().catch(()=>{})}catch(e){}}
+/* 첫 터치 때 소리 잠금 해제 (iOS) */
+function unlockSnd(){_tick.forEach(a=>{a.muted=true;a.play().then(()=>{a.pause();a.currentTime=0;a.muted=false}).catch(()=>{a.muted=false})})}
+document.addEventListener('touchend',unlockSnd,{once:true});document.addEventListener('click',unlockSnd,{once:true});
 function sendSound(){try{const a=new Audio(SOUND.send||'send.mp3');a.volume=.9;a.play().catch(()=>{})}catch(e){}}
 
 /* 한글을 자음/모음 순서로 쳐지게: 안 → ㅇ → 아 → 안 */

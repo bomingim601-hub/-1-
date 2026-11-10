@@ -45,6 +45,17 @@ function alarm(title,sub='',o={}){return new Promise(res=>{
 })}
 const phoneTime=async(tw)=>{await Phone.open(tw)};
 
+/* 책상 위 카드 고르기 */
+function cardPick(title,opts){return new Promise(res=>{
+  const rot=[-6,4,-3,7,-5,3],dy=[0,2,-1,1,-2,0];
+  set(`<p class="q">${title}</p><p class="hint" style="margin-top:-2cqw">마음이 가는 카드를 한 장 골라보세요</p><div class="cards">${opts.map((t,i)=>`<button class="kc" data-i="${i}" style="--r:${rot[i%6]}deg;--y:${dy[i%6]}cqw;animation-delay:${i*90}ms"><span>${t}</span></button>`).join('')}</div>`,{bg:'wood'});
+  scr.classList.add('woodbg');
+  let done=false;
+  scr.querySelectorAll('.kc').forEach(b=>b.onclick=async()=>{if(done)return;done=true;
+    scr.querySelectorAll('.kc').forEach(c=>c!==b&&c.classList.add('away'));b.classList.add('pick');
+    await sleep(1700);res(+b.dataset.i)});
+})}
+
 /* ---------- 공통 장면 ---------- */
 async function dayCard(n,sub=''){await black(0);await say(`<span class="big">${n}일차</span>${sub?`<span class="sub">${sub}</span>`:''}`,sub?2400:1800)}
 
@@ -85,12 +96,10 @@ async function d1(){
 /* ---------- 2일차 (핸드폰 없음) ---------- */
 async function d2(){
   await dayCard(2);
-  await ask(DATE_Q,DATE_OPTS);
+  await cardPick(DATE_Q,DATE_OPTS);
   await black(1000);
   await say(DATE_AFTER,3000);
-  await black(1200);
-  await say(EVENING,2000);
-  await black(800);
+  await black(2000);
   await vote(2);
   await afterVote(2);
 }
