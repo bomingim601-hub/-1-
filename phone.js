@@ -15,7 +15,8 @@ const $=i=>document.getElementById(i),P=$('phone');
 const FAV=['엄마','아빠','큰오빠','작은오빠'];
 const REC=[['02-2006-0621','전화번호',1,'어제'],['큰오빠','휴대전화',0,'어제'],['엄마','휴대전화',0,'어제'],['엄마','휴대전화',0,'일요일'],['아빠','휴대전화',0,'일요일'],['작은오빠','휴대전화',0,'토요일']];
 const MS=[['엄마','대영아 사랑해^^'],['큰오빠','쫄지말고 원래 잘 하잖아'],['작은오빠','대영아 대구여자 보여주라'],['아빠','아빠가 걱정이 많네.. 딸 사랑해']];
-const TH={};MS.forEach(m=>TH[m[0]]=[[m[1],0]]);
+const thInit=k=>(typeof FAMILY_CHAT!=='undefined'&&FAMILY_CHAT[k])?FAMILY_CHAT[k].map(m=>m[0]=='t'?['t',m[1]]:[m[0],m[1]?1:0]):[[MS.find(m=>m[0]==k)[1],0]];
+const TH={};MS.forEach(m=>TH[m[0]]=thInit(m[0]));
 const KEYS=[['1',''],['2','ABC'],['3','DEF'],['4','GHI'],['5','JKL'],['6','MNO'],['7','PQRS'],['8','TUV'],['9','WXYZ'],['*',''],['0','+'],['#','']];
 let tab='fav',num='',cur='home',curT='',NT=[],ci=-1,T,nTm,gi=0,igOn=false,curTW=[];
 const S=(p,x='')=>`<svg viewBox="0 0 24 24" ${x}>${p}</svg>`;
@@ -61,9 +62,17 @@ function bk(){num=num.slice(0,-1);rCall()}
 function callTo(n){$('v-calling').innerHTML=`<div class="cn"><h3>${n||'번호 없음'}</h3><p id="ct">전화 거는 중...</p></div><button class="end" onclick="endCall()">${ico.ph}</button>`;go('calling');let s=0;clearInterval(T);setTimeout(()=>{T=setInterval(()=>{s++;const e=$('ct');if(e)e.textContent=String(s/60|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},1000);const e=$('ct');if(e)e.textContent='00:00'},1500)}
 function endCall(){clearInterval(T);go('call')}
 function rMsg(){$('v-msg').innerHTML=`<div class="hd"><button class="pb">편집</button><button class="pb">☰</button></div><div class="sc"><h2 class="t">메시지</h2>${MS.map((m,i)=>`<div class="row" data-n="${m[0]}" onclick="openTh(this.dataset.n)">${i==0?'<i class="dot"></i>':''}${av(m[0])}<div class="rt"><b>${m[0]}</b><small>${m[1]}</small></div><span class="dy">어제 ›</span></div>`).join('')}</div><div class="sb"><div class="sp">⌕&nbsp;검색</div><button class="pb sq">✎</button></div>`}
-function openTh(n){curT=n;rTh();go('thread')}
-function rTh(){$('v-thread').innerHTML=`<div class="hd"><button class="pb" onclick="go('msg')">${ico.back}</button><div class="tn">${av(curT,'s')}${curT}</div><span style="width:11cqw"></span></div><div class="sc th" id="ths">${TH[curT].map(m=>`<div class="bb ${m[1]?'me':''}">${m[0]}</div>`).join('')}</div><div class="sb"><input id="ti" class="sp" placeholder="iMessage" onkeydown="if(event.key=='Enter')snd()"><button class="pb sq" onclick="snd()">↑</button></div>`;const s=$('ths');s.scrollTop=1e5}
-function snd(){const v=$('ti').value.trim();if(!v)return;TH[curT].push([v,1]);rTh();$('ti').focus()}
+function openTh(n){curT=n;rTh();go('thread');requestAnimationFrame(()=>{const t=$('ths');if(t)t.scrollTop=1e5})}
+function rTh(){const L=TH[curT];let h='';
+  const nowT=()=>{const d=new Date();return `오후 ${((d.getHours()+11)%12)+1}:${String(d.getMinutes()).padStart(2,'0')}`};
+  L.forEach((m,i)=>{if(m[0]=='t'){h+=`<p class="tdt">${m[1].replace(/(\(.*?\))/,'<b>$1</b>')}</p>`;return}
+    const nx=L[i+1],last=!nx||nx[0]=='t'||nx[1]!==m[1];
+    h+=`<div class="bb ${m[1]?'me':''}${last?' tl':''}">${m[0]}</div>`});
+  let li=-1;L.forEach((m,i)=>{if(m[0]!='t'&&m[1])li=i});
+  const lastMe=li>=0&&L.slice(li+1).every(m=>m[0]=='t'||m[1]);
+  if(lastMe)h+=`<p class="rd">${L[li][2]?'전송됨':'읽음'}</p>`;
+  $('v-thread').innerHTML=`<div class="thh"><button class="pb" onclick="go('msg')">${ico.back}</button><div class="thp">${av(curT)}<div class="thn">${curT} <i>›</i></div></div><span class="thv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="m15.5 10.5 6-3.5v10l-6-3.5z"/></svg></span></div><div class="sc th" id="ths">${h}</div><div class="sb"><span class="tpl">＋</span><input id="ti" class="sp" placeholder="iMessage" onkeydown="if(event.key=='Enter')snd()"><button class="pb sq" onclick="snd()">↑</button></div>`;const s=$('ths');s.scrollTop=1e5}
+function snd(){const v=$('ti').value.trim();if(!v)return;const L=TH[curT],d=new Date();if(!L.some(m=>m[0]=='t'&&m[1].startsWith('오늘')))L.push(['t',`오늘 오후 ${((d.getHours()+11)%12)+1}:${String(d.getMinutes()).padStart(2,'0')}`]);L.push([v,1,1]);if(typeof sendSound=='function')sendSound();rTh();$('ti').focus()}
 function rMemo(){$('v-memo').innerHTML=`<div class="hd"><button class="pb" onclick="go('home')">${ico.back}</button><span></span></div><div class="sc"><h2 class="t">메모</h2><small class="cnt">${NT.length}개의 메모</small>${NT.length?'<div class="card">'+NT.map((t,i)=>{const [a,...b]=t.split('\n');return `<div class="row" onclick="openNote(${i})"><div class="rt"><b>${a||'새로운 메모'}</b><small>${b.join(' ')||'추가 텍스트 없음'}</small></div></div>`}).join('')+'</div>':'<p class="em">오른쪽 아래 버튼으로<br>새 메모를 만들어보세요</p>'}</div><div class="sb"><div class="sp">⌕&nbsp;검색</div><button class="pb sq" onclick="NT.unshift('');openNote(0)">✎</button></div>`}
 function openNote(i){ci=i;$('v-note').innerHTML=`<div class="hd"><button class="pb" onclick="saveNote();go('memo')">${ico.back}</button><button class="pb" onclick="saveNote();go('memo')">완료</button></div><textarea id="ta" class="ta" placeholder="메모를 적어보세요">${NT[i]}</textarea>`;go('note');setTimeout(()=>$('ta')&&$('ta').focus(),300)}
 function saveNote(){const e=$('ta');if(!e||ci<0)return;const v=e.value;if(v.trim())NT[ci]=v;else NT.splice(ci,1);ci=-1}
@@ -104,7 +113,7 @@ const Phone={
   /* 히든: 몇 달 뒤 잠금화면 → 인스타 DM 알림 */
   openHidden(){igOn=false;curTW=[];$('phone').hidden=false;go('lock');_hid=setTimeout(()=>{igOn=true;notify({icon:igI(),title:'유우시',body:'대영 마지막화 같이 볼거야? 볼거면 우리집 와',sticky:1,tap:()=>go('dm')})},1200);return new Promise(r=>{_closeRes=r})},
   /* 처음으로 돌아가기 (메모·문자·히든 전부 초기화) */
-  reset(){clearTimeout(_hid);clearInterval(T);NT=[];DMS.length=0;igOn=false;tab='fav';num='';ci=-1;curT='';for(const k in TH)TH[k]=[[MS.find(m=>m[0]==k)[1],0]];$('nt').classList.remove('on');$('phone').hidden=true;_closeRes=null;go('home')},
+  reset(){clearTimeout(_hid);clearInterval(T);NT=[];DMS.length=0;igOn=false;tab='fav';num='';ci=-1;curT='';for(const k in TH)TH[k]=thInit(k);$('nt').classList.remove('on');$('phone').hidden=true;_closeRes=null;go('home')},
   notify
 };
 /* 아래 홈 바: 앱 안이면 홈으로, 홈이면 폰 닫기 (눌러도 되고 위로 쓸어도 됨) */
