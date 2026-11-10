@@ -246,9 +246,9 @@ img.c{object-fit:contain!important;background:#c1272d}
 @keyframes blUp{from{transform:translateY(14cqw) scale(.7);opacity:0}}
 .q-sread{align-self:flex-end;margin:.6cqw 1cqw 0;font-size:3cqw;color:#8e8e93}
 .q-sf{padding:2cqw 3cqw 8cqw;background:#fff}
-.q-sch{display:flex;flex-wrap:wrap;justify-content:center;gap:2cqw;margin-bottom:3cqw;transition:opacity .3s}
+.q-sch{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:1.4cqw;margin-bottom:3cqw;transition:opacity .3s}
 .q-sch.lock{opacity:.35;pointer-events:none}
-.q-chip{border:.3cqw solid #d1d1d6;background:#f2f2f7;color:#000;border-radius:6cqw;padding:2.2cqw 4.4cqw;font:inherit;font-size:4cqw;cursor:pointer}
+.q-chip{flex:1 1 0;min-width:0;white-space:nowrap;border:.3cqw solid #d1d1d6;background:#f2f2f7;color:#000;border-radius:6cqw;padding:2.2cqw 0;font:inherit;font-size:3.6cqw;letter-spacing:-.03em;cursor:pointer}
 .q-chip.off{opacity:.25;text-decoration:line-through;pointer-events:none}
 .q-chip.glow{border-color:#0a84ff;background:#e6f1ff;color:#0a64d8;box-shadow:0 0 0 1.2cqw rgba(10,132,255,.15);animation:gl 1.6s ease-in-out infinite}
 @keyframes gl{50%{box-shadow:0 0 0 2.2cqw rgba(10,132,255,.08)}}
