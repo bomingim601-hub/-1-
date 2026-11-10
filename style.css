@@ -52,8 +52,8 @@ h1.title{font-size:13cqw;margin:0 0 6cqw;color:#ff5c8a;font-weight:800}
 .env{width:80cqw;cursor:pointer;filter:drop-shadow(0 2cqw 3cqw rgba(0,0,0,.35));animation:float 2.4s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-1.5cqw)}}
 .envph{width:80cqw;height:52cqw;font-size:12cqw;cursor:pointer;display:grid;place-items:center;background:#e9dfc8;border-radius:2cqw}
-.sheet{width:100%;min-height:130cqw;background:#fdf8ef center/100% 100%;padding:12cqw 9cqw;text-align:left;
-  font-family:"Nanum Pen Script","Apple SD Gothic Neo",cursive;font-size:6.2cqw;line-height:1.45;white-space:pre-line;color:#2b2118}
+.sheet{width:100%;background:#fdf8ef center/100% 100%;padding:10cqw 8cqw;text-align:left;word-break:keep-all;
+  font-family:"Gowun Batang","Apple SD Gothic Neo",serif;font-size:3.7cqw;line-height:1.85;white-space:pre-line;color:#2b2118}
 .nx{opacity:0;transition:opacity .6s;pointer-events:none;width:100%;display:flex;flex-direction:column;gap:4cqw;align-items:center}
 .nx.on{opacity:1;pointer-events:auto}
 .board{width:100%;padding:6cqw 3cqw;border:3cqw solid #d8bf8c;background:#b58a55 center/cover;display:grid;grid-template-columns:1fr 1fr;gap:7cqw 2cqw;justify-items:center}
@@ -185,3 +185,7 @@ img.c{object-fit:contain!important;background:#c1272d}
 .phone:not([hidden]){animation:pin .6s both}
 @keyframes pin{from{opacity:0}}
 .endbox{text-align:center}
+
+/* 4일차 마지막 대화: 대사는 위쪽 단색 영역 안에서만, 오래된 줄은 위로 사라짐 */
+.in.win{height:52%;flex:none;overflow:hidden;justify-content:flex-end;gap:3cqw;
+  -webkit-mask-image:linear-gradient(transparent,#000 22%);mask-image:linear-gradient(transparent,#000 22%)}

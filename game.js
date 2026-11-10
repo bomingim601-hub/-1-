@@ -27,8 +27,9 @@ async function say(h,ms,o={}){set(`<p class="q" style="margin:0">${h}</p>`,o);aw
 /* 한 줄씩 나오고, 화면을 누르면 다음 줄 */
 async function story(lines,o={}){
   set('',{...o,top:1});const box=scr.querySelector('.in');box.style.paddingTop='14cqw';
+  if(o.win)box.classList.add('win');  /* 배경 단색 부분 안에서만 대사가 보이게 */
   for(let i=0;i<lines.length;i++){
-    const p=document.createElement('p');p.className='line';p.textContent=lines[i];box.appendChild(p);scr.scrollTop=1e5;
+    const p=document.createElement('p');p.className='line';p.textContent=lines[i];box.appendChild(p);if(!o.win)scr.scrollTop=1e5;
     await new Promise(r=>{const f=()=>{scr.removeEventListener('click',f);r()};setTimeout(()=>scr.addEventListener('click',f),350)});
   }
 }
@@ -114,7 +115,7 @@ async function d3(){
 /* ---------- 4일차 (핸드폰 없음) ---------- */
 async function d4(){
   await dayCard(4);
-  await story(st.lie?SUCC_CONV:FAIL_CONV,{bg:'lastChatBg'});
+  await story(st.lie?SUCC_CONV:FAIL_CONV,{bg:'lastChatBg',win:1});
   await black(500);
   const c=await ask('',['X룸에 들어간다','퍼스널룸에 들어간다']);
   if(c==0){await xRoom()}
