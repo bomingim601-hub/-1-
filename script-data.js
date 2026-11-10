@@ -48,6 +48,7 @@ const KNIFE = [
 
 /* 문자 투표 / 알람 */
 const VOTE_Q = "문자 투표";
+const EVENING = "그 날, 저녁";
 const FORGET = "이제 잊기로 했잖아...";
 const ALARM_NOPICK = "당신의 X는 당신을 고르지 않았습니다.";
 const ALARM_CHECK = "핸드폰으로 반응을 확인해보세요";

@@ -50,12 +50,8 @@ async function dayCard(n,sub=''){await black(0);await say(`<span class="big">${n
 
 /* 문자 투표: 유우시를 누르면 '이제 잊기로 했잖아...' 후 유우시 칸이 까맣게 */
 async function vote(d){
-  let dis=[];
-  while(1){
-    const i=await ask(VOTE_Q,NAMES,{dis});
-    if(i==NAMES.length-1){st.y[d]=1;await say(FORGET,1800);dis=[i];continue}
-    return i;
-  }
+  const Y=NAMES.length-1;
+  return smsAsk('vote',NAMES,{reject:Y,rejectText:FORGET,onReject:()=>{st.y[d]=1}});
 }
 /* 투표 후: 1시간 후 → 알람 (→ 핸드폰) */
 async function afterVote(d,o={}){
@@ -92,7 +88,9 @@ async function d2(){
   await ask(DATE_Q,DATE_OPTS);
   await black(1000);
   await say(DATE_AFTER,3000);
-  await black(2000);
+  await black(1200);
+  await say(EVENING,2000);
+  await black(800);
   await vote(2);
   await afterVote(2);
 }
@@ -110,7 +108,9 @@ async function d3(){
   await sleep(500);push(c?SECRET.lie.say:SECRET.truth.say,1);
   await sleep(1300);push(SECRET.thanks);
   await sleep(2500);
-  await black(2000);
+  await black(1200);
+  await say(EVENING,2000);
+  await black(800);
   await story(KNIFE);
   await black(300);
   await vote(3);
@@ -137,7 +137,7 @@ async function d5(){
   await dayCard(5);
   const ok=!!(st.lie&&st.pr&&st.y[1]&&st.y[2]&&st.y[3]&&st.y[4]);
   const Y=NAMES.length-1,others=NAMES.map((_,i)=>i).filter(i=>i!=Y);
-  await ask('최종 선택',NAMES,ok?{dis:others,glow:[Y]}:{dis:[Y]});
+  await smsAsk('final',NAMES,ok?{dis:others,glow:[Y]}:{dis:[Y]});
   await black(300);
   const tw=st.lie?TW_SUCCESS:TW_FAIL;
   if(ok){await alarm('메시지',ALARM_CHECK)}

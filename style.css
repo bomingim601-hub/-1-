@@ -225,3 +225,54 @@ img.c{object-fit:contain!important;background:#c1272d}
 .al.ios .av i svg,.al.ios .av i img{width:100%;height:100%}
 .al.ios b{font-size:4.4cqw}.al.ios span{opacity:1;color:#222}
 .al.ios em{position:absolute;top:4cqw;right:5cqw;font-style:normal;font-size:3.6cqw;color:#8a8a8e}
+
+/* ---------- 문자 투표 (아이폰 메시지) ---------- */
+#sms{text-align:left;position:absolute;inset:0;z-index:25;display:none;flex-direction:column;background:#fff;color:#000;
+  font-family:-apple-system,"SF Pro","Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+#sms.on{display:flex;animation:smsIn .35s ease-out}
+@keyframes smsIn{from{transform:translateY(8%);opacity:0}}
+.q-sh{position:relative;display:flex;align-items:flex-start;justify-content:space-between;padding:13cqw 4cqw 3cqw;border-bottom:.3cqw solid #e6e6e6;background:rgba(250,250,250,.96)}
+.q-sbk,.q-scm{width:13cqw;height:11cqw;border-radius:6cqw;border:.3cqw solid #e2e2e2;display:grid;place-items:center;box-shadow:0 .6cqw 2cqw rgba(0,0,0,.06);margin-top:1cqw}
+.q-sbk svg{width:5.5cqw;height:5.5cqw}.q-scm svg{width:6.5cqw;height:6.5cqw}
+.q-sp{display:flex;flex-direction:column;align-items:center;gap:0;margin-top:-6cqw}
+.q-sav{width:15cqw;height:15cqw;border-radius:50%;background:linear-gradient(#a7b2c9,#7d89a7);color:#fff;font-size:7.5cqw;font-weight:700;display:grid;place-items:center;position:relative;z-index:1}
+.q-snm{margin-top:-1.5cqw;padding:1.2cqw 3.6cqw;border:.3cqw solid #e2e2e2;border-radius:6cqw;background:#fff;font-size:4.2cqw;font-weight:700}
+.q-snm i{font-style:normal;color:#aaa;font-weight:400}
+.q-sb{flex:1;overflow-y:auto;padding:3cqw 4cqw;display:flex;flex-direction:column;gap:1.4cqw}
+.q-sdt{align-self:center;margin:2cqw 0 3cqw;font-size:3.3cqw;color:#8e8e93}
+.q-bl{max-width:72%;padding:2.6cqw 4cqw;border-radius:5cqw;font-size:4.2cqw;line-height:1.45;word-break:keep-all;position:relative}
+.q-bl.q-in{align-self:flex-start;background:#e9e9eb;color:#000;border-bottom-left-radius:1.4cqw}
+.q-bl.q-out{align-self:flex-end;background:#0a84ff;color:#fff;border-bottom-right-radius:1.4cqw;animation:blUp .35s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes blUp{from{transform:translateY(14cqw) scale(.7);opacity:0}}
+.q-sread{align-self:flex-end;margin:.6cqw 1cqw 0;font-size:3cqw;color:#8e8e93}
+.q-sf{padding:2cqw 3cqw 8cqw;background:#fff}
+.q-sch{display:flex;flex-wrap:wrap;justify-content:center;gap:2cqw;margin-bottom:3cqw;transition:opacity .3s}
+.q-sch.lock{opacity:.35;pointer-events:none}
+.q-chip{border:.3cqw solid #d1d1d6;background:#f2f2f7;color:#000;border-radius:6cqw;padding:2.2cqw 4.4cqw;font:inherit;font-size:4cqw;cursor:pointer}
+.q-chip.off{opacity:.25;text-decoration:line-through;pointer-events:none}
+.q-chip.glow{border-color:#0a84ff;background:#e6f1ff;color:#0a64d8;box-shadow:0 0 0 1.2cqw rgba(10,132,255,.15);animation:gl 1.6s ease-in-out infinite}
+@keyframes gl{50%{box-shadow:0 0 0 2.2cqw rgba(10,132,255,.08)}}
+.q-snote{min-height:5cqw;margin:0 0 2cqw;text-align:center;font-size:3.8cqw;color:#8e8e93;font-style:italic;opacity:0;transition:opacity .4s}
+.q-snote.on{opacity:1}
+.q-sin{display:flex;align-items:center;gap:2.5cqw}
+.q-spl{flex:none;width:10cqw;height:10cqw;border-radius:50%;border:.3cqw solid #e2e2e2;display:grid;place-items:center;font-size:6cqw;color:#555}
+.q-sbox{flex:1;min-height:10cqw;border:.3cqw solid #d8d8dc;border-radius:5.5cqw;display:flex;align-items:center;padding:0 1.2cqw 0 4cqw;font-size:4.2cqw;position:relative}
+.q-sph{color:#b0b0b5}
+.q-scur{display:inline-block;width:.45cqw;height:5cqw;background:#0a84ff;margin:0 .3cqw;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.q-ssend{margin-left:auto;width:7.6cqw;height:7.6cqw;border-radius:50%;border:0;background:#0a84ff;padding:1.2cqw;opacity:0;transform:scale(.4);transition:.2s}
+.q-ssend.on{opacity:1;transform:scale(1)}.q-ssend.press{transform:scale(.8)}
+.q-ssend svg{width:100%;height:100%}
+
+/* X 검색 헤더 + 리트윗/북마크 */
+.xh{top:14cqw;left:3cqw;right:3cqw;height:12cqw}
+.xbk{flex:none;width:12cqw;height:12cqw;border-radius:50%;border:.3cqw solid #333639;background:none;color:#e7e9ea;padding:2.8cqw;display:grid;place-items:center}
+.xbk svg,.xfl svg{width:100%;height:100%}
+.xs{height:11cqw;background:#202327;gap:2.6cqw;font-size:4.5cqw;color:#e7e9ea}.xs svg{width:5.6cqw;height:5.6cqw;color:#e7e9ea}
+.xfl{flex:none;width:7cqw;height:7cqw;color:#e7e9ea}
+.xt{top:29cqw;font-size:4.1cqw}.xt b{padding:3.4cqw 0 3.2cqw;position:relative}
+.xt b.on{box-shadow:none;color:#e7e9ea}.xt b.on::after{content:'';position:absolute;left:50%;bottom:0;width:11cqw;height:1cqw;border-radius:1cqw;background:#1d9bf0;transform:translateX(-50%)}
+.act .xrt,.act .xbm{cursor:pointer}
+.act .xrt.on{color:#00ba7c}
+.act .xbm.on{color:#1d9bf0}.act .xbm.on .hp{fill:#1d9bf0}
+.sc.x{top:40.5cqw}
