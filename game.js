@@ -70,7 +70,7 @@ async function afterVote(d,o={}){
   const special=(d==3&&st.lie&&st.y[3]);
   if(special){
     await alarm(ALARM_PICKED,'',{from:'제작진'});
-    await sleep(600);await alarm(ALARM_PICKED_MSG,'',{from:'유우시'});
+    await sleep(600);await alarm('X가 보낸 메시지입니다.',`"${ALARM_PICKED_MSG}"`,{from:'제작진'});
     if(o.tweets){await black(1200);await alarm('메시지',ALARM_CHECK)}
   }else{
     await alarm(ALARM_NOPICK,'',{from:'제작진'});
