@@ -6,9 +6,14 @@ const OKIMG={};
 function preloadImages(list){return Promise.all(list.filter(Boolean).map(u=>new Promise(r=>{const i=new Image();i.onload=()=>{OKIMG[u]=1;r()};i.onerror=()=>r();i.src=u})))}
 const U=u=>u&&OKIMG[u]?u:'';
 let _ac;
+/* 알림음: 한 번 터치했을 때 미리 풀어둔 소리를 계속 재사용 (아이폰에서 자동 재생 막히는 것 방지) */
+const _ding=new Audio(SOUND.ding);_ding.preload='auto';_ding.volume=.8;
 function playDing(){
-  try{const a=new Audio(SOUND.ding);a.volume=.8;a.play().catch(webDing);a.onerror=webDing}catch(e){webDing()}
+  try{_ding.pause();_ding.currentTime=0;_ding.play().catch(webDing)}catch(e){webDing()}
 }
+function _unlockDing(){try{_ding.muted=true;_ding.play().then(()=>{_ding.pause();_ding.currentTime=0;_ding.muted=false}).catch(()=>{_ding.muted=false})}catch(e){}
+  try{_ac=_ac||new(window.AudioContext||window.webkitAudioContext)();_ac.resume&&_ac.resume()}catch(e){}}
+document.addEventListener('touchend',_unlockDing,{once:true});document.addEventListener('click',_unlockDing,{once:true});
 function webDing(){try{_ac=_ac||new(window.AudioContext||window.webkitAudioContext)();const c=_ac,o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.setValueAtTime(.25,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.7);o.start();o.stop(c.currentTime+.7)}catch(e){}}
 const iconImg=(k,color,svg)=>U(IMG[k])?`<img src="${IMG[k]}">`:`<div class="fbi" style="background:${color}">${svg}</div>`;
 const $=i=>document.getElementById(i),P=$('phone');
