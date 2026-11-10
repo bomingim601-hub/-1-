@@ -82,10 +82,10 @@ async function vote(d){
 /* 투표 후: 1시간 후 → 알람 (→ 핸드폰) */
 async function afterVote(d,o={}){
   await black(300);await say('1시간 후',1500);
-  const special=(d==3&&st.lie&&st.y[3]);
+  const special=(d>=3&&st.lie&&st.y[3]&&st.y[d]);   // 3일차 거짓말 이후로 X가 계속 고름
   if(special){
     await alarm(ALARM_PICKED,'',{from:'제작진'});
-    await sleep(600);await alarm('X가 보낸 메시지입니다.',`"${ALARM_PICKED_MSG}"`,{from:'제작진'});
+    await sleep(600);await alarm('X가 보낸 메시지입니다.',`"${X_MSG[d]||ALARM_PICKED_MSG}"`,{from:'제작진'});
     if(o.tweets){await black(1200);await alarm('메시지',ALARM_CHECK)}
   }else{
     await alarm(ALARM_NOPICK,'',{from:'제작진'});

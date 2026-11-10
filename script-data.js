@@ -55,6 +55,11 @@ const ALARM_NOPICK = "당신의 X는 당신을 고르지 않았습니다.";
 const ALARM_CHECK = "핸드폰으로 반응을 확인해보세요";
 const ALARM_PICKED = "X가 당신을 선택했습니다";
 const ALARM_PICKED_MSG = "대영 왜 거짓말로 알려줬어?";
+/* X가 고른 날 제작진이 전해주는 X의 메시지 (일차별) */
+const X_MSG = {
+  3: "대영 왜 거짓말로 알려줬어?",
+  4: "내일이 마지막이네"
+};
 
 /* 4일차 X와 마지막 대화 (한 줄씩 보여줌) */
 const FAIL_CONV = [
