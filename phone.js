@@ -34,12 +34,12 @@ const xI=()=>'<svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#0
 /* 트위터 영어 아이디 (이름마다 항상 같은 아이디로 나옴) */
 const HW1=["moon","cozy","dreamy","peach","night","milky","sunny","lazy","mint","honey","cloudy","pinky","sleepy","blue","berry","soft"];
 const HW2=["cat","bunny","holic","lover","diary","log","zip","toast","mochi","jelly","star","fan","bear","tea","day","bean"];
-const handle=n=>{if(/^[a-z0-9_]+$/i.test(n))return n;let h=7;for(const c of n)h=(h*131+c.charCodeAt(0))%1000003;
+const handle=n=>{const F=(IMG.twFixed||{})[n];if(F&&F.id)return F.id;if(/^[a-z0-9_]+$/i.test(n))return n;let h=7;for(const c of n)h=(h*131+c.charCodeAt(0))%1000003;
   const sep=["_","","_",""][h%4];return HW1[h%16]+sep+HW2[(h>>4)%16]+(h%3?String(h%97).padStart(2,'0'):'')};
 /* 트위터 프사: 모든 트윗 아이디를 순서대로 사진에 배정 */
 let _avMap=null;
-const twAv=n=>{const L=(IMG.twAvatars||[]);
-  if(L.length){if(!_avMap){_avMap={};let k=0;for(const t of [...TW_DAY1,...TW_DAY3,...TW_FAIL,...TW_SUCCESS])if(!(t[0] in _avMap))_avMap[t[0]]=k++}
+const twAv=n=>{const F=(IMG.twFixed||{})[n];if(F&&F.av)return `<div class="ta2" style="background:#333 url('${F.av}') center/cover"></div>`;const L=(IMG.twAvatars||[]);
+  if(L.length){if(!_avMap){_avMap={};let k=0;for(const t of [...TW_DAY1,...TW_DAY3,...TW_FAIL,...TW_SUCCESS])if(!(t[0] in _avMap)&&!(IMG.twFixed||{})[t[0]])_avMap[t[0]]=k++}
     return `<div class="ta2" style="background:#333 url('${L[(_avMap[n]??0)%L.length]}') center/cover"></div>`}
   return `<div class="ta2" style="background:hsl(${hue(n)} 40% 38%)">${n[0]}</div>`};
 const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};

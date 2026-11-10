@@ -38,6 +38,13 @@ const IMG = {
   /* 트위터(X) 프사 — 아이디마다 하나씩 자동으로 배정돼 (사진 추가/교체는 av 폴더에) */
   twAvatars: Array.from({length:19},(_,i)=>`av/av${String(i+1).padStart(2,"0")}.jpg`),
 
+  /* 아이디·프사를 직접 정한 계정 [트윗 이름]: {id, av} */
+  twFixed: {
+    "입력해주세요": {id:"p1easenter", av:"av/p1easenter.jpg"},
+    "짱짱":        {id:"Yezzzan9",   av:"av/yezzzan9.jpg"},
+    "ま(しめ)ろ":   {id:"meroniams",  av:"av/meroniams.jpg"}
+  },
+
   /* 유우시 인스타 */
   yushiProfile: "yushi-profile.jpg",
   insta: [                                    // 피드 사진 (6장까지 넣을 수 있어. 지금은 4장)
