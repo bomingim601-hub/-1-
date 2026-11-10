@@ -44,7 +44,7 @@ function alarm(title,sub='',o={}){return new Promise(res=>{
 const phoneTime=async(tw)=>{await Phone.open(tw)};
 
 /* ---------- 공통 장면 ---------- */
-async function dayCard(n){await black(0);await say(`<span class="big">${n}일차</span>`,1800)}
+async function dayCard(n,sub=''){await black(0);await say(`<span class="big">${n}일차</span>${sub?`<span class="sub">${sub}</span>`:''}`,sub?2400:1800)}
 
 /* 문자 투표: 유우시를 누르면 '이제 잊기로 했잖아...' 후 유우시 칸이 까맣게 */
 async function vote(d){
@@ -70,7 +70,7 @@ async function afterVote(d,o={}){
 
 /* ---------- 1일차 ---------- */
 async function d1(){
-  await dayCard(1);
+  await dayCard(1,'인터뷰룸');
   const L={light:1,bg:'interviewBg'};
   await say(INTRO,3000,L);
   const a=await ask(Q1,Q1_OPTS,L);

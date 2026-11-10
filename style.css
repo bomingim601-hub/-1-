@@ -189,3 +189,4 @@ img.c{object-fit:contain!important;background:#c1272d}
 /* 4일차 마지막 대화: 대사는 위쪽 단색 영역 안에서만, 오래된 줄은 위로 사라짐 */
 .in.win{height:52%;flex:none;overflow:hidden;justify-content:flex-end;gap:3cqw;
   -webkit-mask-image:linear-gradient(transparent,#000 22%);mask-image:linear-gradient(transparent,#000 22%)}
+.sub{display:block;margin-top:3cqw;font-size:4.6cqw;letter-spacing:.3em;opacity:.7}
