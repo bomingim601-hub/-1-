@@ -51,7 +51,7 @@ const twAv=n=>{const F=(IMG.twFixed||{})[n];if(F&&F.av)return `<div class="ta2" 
 const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
 const av=(n,c='')=>`<div class="av ${c}">${/^\d/.test(n)?ico.person2:n.length<=2?n:n[0]}</div>`;
 const bg=u=>U(u)?`style="background:url('${u}') center/cover"`:'';
-const R={home:rHome,call:rCall,msg:rMsg,memo:rMemo,ig:rIG,dm:rDM,x:rX,lock:rLock};
+const R={igp:()=>{},home:rHome,call:rCall,msg:rMsg,memo:rMemo,ig:rIG,dm:rDM,x:rX,lock:rLock};
 function go(n){if(cur==='note'&&n!=='memo'&&$('ta'))saveNote();(R[n]||(()=>{}))();document.querySelectorAll('.v').forEach(v=>v.classList.toggle('on',v.id==='v-'+n));P.dataset.t={home:'l',x:'l',lock:'l',calling:'l'}[n]||'d';cur=n}
 function rHome(){const a=[['call','전화',`${iconImg('iconCall','#34c759',ico.ph)}`,0],['msg','메시지',`${iconImg('iconMsg','#34c759',ico.ph)}`,0],['memo','메모',`${iconImg('iconMemo','#ffd60a',ico.home)}`,0],['x','X',xI(),0]];if(igOn)a.splice(3,1,['dm','인스타그램',igI(),1]);
 $('v-home').style.backgroundImage=U(IMG.homeWallpaper)?`url('${IMG.homeWallpaper}')`:'';
@@ -96,7 +96,7 @@ const XI={
   sh:XS('<path d="M12 15V4"/><path d="M7.5 8.5 12 4l4.5 4.5"/><path d="M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14"/>')
 };
 function tg(e){const on=e.classList.toggle('on'),i=e.querySelector('i');if(i)i.textContent=(+e.dataset.n+(on?1:0)).toLocaleString()}
-function rIG(){const g=IMG.insta.map((u,i)=>`<div ${bg(u)}>${U(u)?'':'대영 사진 '+(i+1)}</div>`).join('');
+function rIG(){const g=IMG.insta.map((u,i)=>`<div ${bg(u)} onclick="openPost(${i})">${U(u)?'':'대영 사진 '+(i+1)}</div>`).join('');
 $('v-ig').innerHTML=`<div class="hd"><button class="pb" onclick="go('dm')">${ico.back}</button><span>🔒 yushi</span><b style="font-size:6cqw;width:11cqw;text-align:center">⋯</b></div><div class="sc" style="padding:0 0 30cqw"><div class="pr"><div class="pa" ${bg(IMG.yushiProfile)}>${U(IMG.yushiProfile)?'':ico.person2.replace('<svg','<svg width="50%" fill="#aaa"')}</div><div class="st"><div><b>${IMG.insta.length}</b>게시물</div><div><b>128</b>팔로워</div><div><b>97</b>팔로잉</div></div></div><div style="padding:0 5cqw;font-size:4.2cqw"><b>유우시</b></div><div class="bt"><button>팔로잉</button><button onclick="go('dm')">메시지</button></div><div class="gr">${g}</div></div><nav class="tb"><button class="on" style="background:none;color:#111">${ico.home.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2"')}</button><button>${ico.reel.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2"')}</button><button>${ico.send.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2"')}</button><button>${ico.search.replace('<svg','<svg fill="none" stroke="currentColor" stroke-width="2.4"')}</button><button class="on"><div class="av s ni8" ${bg(IMG.yushiProfile)}></div></button></nav>`}
 const DMS=[];
 const dmTime=()=>{const d=new Date(),h=d.getHours();return (h<12?'오전 ':'오후 ')+(h%12||12)+':'+String(d.getMinutes()).padStart(2,'0')};
@@ -127,3 +127,22 @@ const Phone={
   hb.addEventListener('pointerup',()=>{y0=null;(cur==='home')?Phone.close():go('home')});
   hb.addEventListener('pointercancel',()=>{y0=null});
 })();
+
+/* 유우시 인스타 게시물 보기 */
+const IGI={
+  ht:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path class="hp" d="M12 20.5s-8-4.7-8-10.6A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8 2.9c0 5.9-8 10.6-8 10.6z"/></svg>',
+  cm:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.4 7.6L3.5 20.5l1.4-4.4A8.5 8.5 0 1 1 20.5 11.5z"/></svg>',
+  sd:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M21.5 3 3 10.2l7.3 2.6L21.5 3zM10.3 12.8l2.7 7.7L21.5 3"/></svg>',
+  bm:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path class="hp" d="M6 3.5h12v17l-6-4.3-6 4.3z"/></svg>',
+  mn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M8 16h12"/></svg>'
+};
+function openPost(i){const p=(typeof INSTA_POSTS!=='undefined'&&INSTA_POSTS[i])||['',0,''],u=IMG.insta[i],n=IMG.insta.length;
+  const pa=`<div class="pav" ${bg(IMG.yushiProfile)}></div>`;
+  $('v-igp').innerHTML=`<div class="igph"><button class="pb" onclick="go('ig')">${ico.back}</button><div class="igpt"><b>게시물</b><small>yushi</small></div><span style="width:12cqw"></span></div>
+  <div class="sc igps"><div class="igpu">${pa}<b>yushi</b><span class="igm">${IGI.mn}</span></div>
+  <div class="igpi" ${bg(u)}><span class="igpn">${i+1}/${n}</span></div>
+  <div class="igpd">${IMG.insta.map((_,k)=>`<i class="${k==i?'on':''}"></i>`).join('')}</div>
+  <div class="igpa"><span class="ilk" data-n="${p[1]}" onclick="tg(this)">${IGI.ht}<i>${p[1]}</i></span><span>${IGI.cm}<i>${Math.max(1,Math.round(p[1]/9))}</i></span><span>${IGI.sd}</span><span class="ibm" onclick="tg(this)">${IGI.bm}</span></div>
+  <div class="igpl"><span class="igpf">${pa}${pa}${pa}</span><span><b>daeyoung_</b>님 외 <b>여러 명</b>이 좋아합니다</span></div>
+  <p class="igpc"><b>yushi</b> ${p[0]}</p><p class="igpt2">${p[2]}</p></div>`;
+  go('igp')}

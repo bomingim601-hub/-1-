@@ -357,3 +357,27 @@ img.c{object-fit:contain!important;background:#c1272d}
 .pcs{margin:7cqw 0 0;display:inline-block;padding:1cqw 3cqw;border:.4cqw solid #b0423a;color:#b0423a;border-radius:1cqw;font-size:3.4cqw;font-weight:700;transform:rotate(-6deg);letter-spacing:.1em}
 
 .q-bl.q-out.q-old{animation:none}
+
+/* 인스타 게시물 */
+.igp{color:#000}
+.igph{position:absolute;top:13cqw;left:4cqw;right:4cqw;height:13cqw;display:flex;align-items:center;justify-content:space-between;z-index:5}
+.igpt{text-align:center;line-height:1.2}.igpt b{display:block;font-size:4.6cqw}.igpt small{font-size:3.4cqw;color:#333}
+.igps{top:29cqw;padding:0 0 30cqw}
+.igpu{display:flex;align-items:center;gap:3cqw;padding:3cqw 4cqw;border-bottom:.3cqw solid #efefef}
+.igpu b{flex:1;font-size:4.2cqw}
+.pav{width:9cqw;height:9cqw;border-radius:50%;background:#ddd center/cover;flex:none;border:.3cqw solid #eee}
+.igm svg{width:7cqw;height:7cqw}
+.igpi{position:relative;width:100%;aspect-ratio:4/5;background:#eee center/cover}
+.igpn{position:absolute;top:3.5cqw;right:3.5cqw;padding:1cqw 2.6cqw;border-radius:5cqw;background:rgba(30,30,30,.7);color:#fff;font-size:3.4cqw}
+.igpd{display:flex;justify-content:center;gap:1.4cqw;padding:3cqw 0 1cqw}.igpd i{width:1.6cqw;height:1.6cqw;border-radius:50%;background:#cfcfcf}.igpd i.on{background:#3b82f6}
+.igpa{display:flex;align-items:center;gap:5cqw;padding:1cqw 4cqw}
+.igpa span{display:flex;align-items:center;gap:1.4cqw;font-size:4.2cqw;font-weight:600}.igpa i{font-style:normal}
+.igpa svg{width:7.4cqw;height:7.4cqw}
+.igpa .ibm{margin-left:auto}
+.igpa .ilk.on{color:#ff3040}.igpa .ilk.on .hp{fill:#ff3040;stroke:#ff3040}
+.igpa .ibm.on .hp{fill:#000}
+.igpl{display:flex!important;flex-direction:row;align-items:center;gap:1.2cqw;margin:2cqw 4cqw 0;font-size:3.8cqw}
+.igpf{display:flex!important;flex-direction:row;margin-right:1cqw;flex:none}.igpf .pav{width:6cqw;height:6cqw;margin-right:-2cqw;border:.5cqw solid #fff}
+.igpc{margin:1.4cqw 4cqw 0;font-size:4.2cqw}
+.igpt2{margin:1.4cqw 4cqw 0;font-size:3.4cqw;color:#8e8e8e}
+.gr div{cursor:pointer}
