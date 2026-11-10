@@ -52,7 +52,7 @@ function cardPick(title,opts){return new Promise(res=>{
   scr.classList.add('woodbg');
   let done=false;
   scr.querySelectorAll('.kc').forEach(b=>b.onclick=async()=>{if(done)return;done=true;
-    scr.querySelectorAll('.kc').forEach(c=>c!==b&&c.classList.add('away'));b.classList.add('pick');
+    scr.querySelectorAll('.kc').forEach(c=>c!==b&&c.classList.add('away'));const r=b.getBoundingClientRect(),S=stage.getBoundingClientRect();b.style.setProperty('--tx',(S.left+S.width/2-(r.left+r.width/2))+'px');b.style.setProperty('--ty',(S.top+S.height/2-(r.top+r.height/2))+'px');b.classList.add('pick');scr.querySelectorAll('.q,.hint').forEach(e=>{e.style.transition='opacity .5s';e.style.opacity=0});
     await sleep(1700);res(+b.dataset.i)});
 })}
 
@@ -164,7 +164,7 @@ async function d5(){
   await smsAsk('final',NAMES,ok?{dis:others,glow:[Y],log:st.sms,day:5}:{dis:[Y],log:st.sms,day:5});
   await black(300);
   const tw=st.lie?TW_SUCCESS:TW_FAIL;
-  if(ok){await alarm('메시지',ALARM_CHECK)}
+  if(ok){await alarm(ALARM_PICKED,'',{from:'제작진'});await sleep(600);await alarm('메시지',ALARM_CHECK)}
   else{await say('1시간 후',1500);await alarm(ALARM_NOPICK,'',{from:'제작진'});await sleep(600);await alarm('메시지',ALARM_CHECK)}
   await Phone.open(tw);
   await black(600);
